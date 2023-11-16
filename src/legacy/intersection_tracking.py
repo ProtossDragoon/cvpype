@@ -59,7 +59,6 @@ def get_line_center_between_edge_pipeline(
         list[int, int]: y=k 의 교점 좌표
     """
     if save_component_output:
-        # Assert for component_output_save_dir
         assert component_output_save_dir, (
             "`component_output_save_dir` should not be empty"
             f"if `save_component_output` is {save_component_output}")
@@ -72,10 +71,8 @@ def get_line_center_between_edge_pipeline(
                 f"Output directory already exists at {component_output_save_dir}")
 
     if save_component_output:
-        # Save the color_image
         cv2.imwrite(os.path.join(component_output_save_dir,
                     f"color_image_{nan}.png"), color_image)
-        # Save the edge_image
         cv2.imwrite(os.path.join(component_output_save_dir,
                     f"edge_image_{nan}.png"), edge_image)
 
@@ -122,13 +119,7 @@ def get_line_center_between_edge_pipeline(
     hist_r = cv2.calcHist([color_image], [0], None, [BIN_COUNT], [0, 256])
     hist_g = cv2.calcHist([color_image], [1], None, [BIN_COUNT], [0, 256])
     hist_b = cv2.calcHist([color_image], [2], None, [BIN_COUNT], [0, 256])
-
-    # TODO
-    # Histogram stretching
-    # Determine the bins that have more than `width_min` pixels
-    # Find the min and max values for valid bins only
-    # Apply histogram stretching on the valid range
-    # Rest of the process remains the same
+    logger.debug(f"Computed color histogram for row y={k}.")
 
     # Save histogram if save_component_output is True
     if save_component_output:
@@ -146,17 +137,21 @@ def get_line_center_between_edge_pipeline(
         plt.close()
         logger.info(f"Saved histogram plot at {histogram_path}.")
 
-    # Log histogram computation
-    logger.debug(f"Computed color histogram for row y={k}.")
+    # TODO
+    # Histogram stretching
+    # Determine the bins that have more than `width_min` pixels
+    # Find the min and max values for valid bins only
+    # Apply histogram stretching on the valid range
+    # Rest of the process remains the same
 
+    # TODO
     # Select threshold actively. We'll find two peaks inside the remaining part.
     # Peaks can be found where there's a change
     # from increasing to decreasing in histogram values.
     # Find the bin with the maximum frequency
     # which is likely to represent black
-    black_threshold = 170 # FIXME: manual
 
-    # Log the calculated black threshold
+    black_threshold = 170 # FIXME: manual
     logger.info(f"Calculated black threshold: {black_threshold}.")
 
     # Check if the region inside the edge pair has black color

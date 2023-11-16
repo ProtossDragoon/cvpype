@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 
 from src.utils import loggerutil
-from src.application.intersection_tracking \
+from legacy.intersection_tracking \
     import get_line_center_between_edge_pipeline
 
 # loggerutil.set_basic_config(logging.DEBUG)
@@ -121,6 +121,12 @@ def single_image_pipeline(
         # Adjust the right lane center since the image was divided
         right_lane_center += (_x_index_center+_occulded_thick)
 
+    # FIXME
+    csv_filename = os.path.join(".", "lane_centers.csv")
+    with open(csv_filename, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([left_lane_center, right_lane_center])
+
     # Step 4: Apply Hough transform to find lines
     lines = cv2.HoughLinesP(edge_image, 1, np.pi / 180,
                             threshold=100, minLineLength=10, maxLineGap=250)
@@ -184,11 +190,5 @@ def single_image_pipeline(
         cv2.putText(merged_image, f"{label}: ({center}, {400})",
                     (center - 30, 400 - 10),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1)
-
-    # FIXME
-    csv_filename = os.path.join(".", "lane_centers.csv")
-    with open(csv_filename, mode='a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow([left_lane_center, right_lane_center])
 
     return merged_image
