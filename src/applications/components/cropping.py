@@ -17,7 +17,7 @@ class CroppingComponent(BaseComponent):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_type=GrayscaledImageType,
+            data_type=GrayscaledImageType(),
             allow_copy=False,
             allow_change=False,
         )
@@ -25,7 +25,7 @@ class CroppingComponent(BaseComponent):
     outputs = [
         ComponentIOSpec(
             name='image',
-            data_type=GrayscaledImageType,
+            data_type=GrayscaledImageType(),
             allow_copy=True,
             allow_change=False,
         )

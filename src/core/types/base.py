@@ -4,9 +4,8 @@ from typing import Any
 class BaseType:
     def __init__(
         self,
-        data: Any,
     ):
-        self.data = data
+        self.data = None
 
     def to_file(
         self,

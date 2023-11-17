@@ -11,7 +11,7 @@ class CVImageVisualizer(ImageVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_type=CVImageType,
+            data_type=CVImageType(),
             allow_copy=False,
             allow_change=False,
         )

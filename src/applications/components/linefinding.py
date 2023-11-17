@@ -23,7 +23,7 @@ class LineFindingComponent(BaseComponent):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_type=EdgeImageType,
+            data_type=EdgeImageType(),
             allow_copy=False,
             allow_change=False,
         )
@@ -31,7 +31,7 @@ class LineFindingComponent(BaseComponent):
     outputs = [
         ComponentIOSpec(
             name='lines',
-            data_type=LinesType,
+            data_type=LinesType(),
             allow_copy=True,
             allow_change=False,
         )
@@ -61,6 +61,8 @@ class LineFindingComponent(BaseComponent):
             minLineLength=minLineLength,
             maxLineGap=maxLineGap
         )
+        if lines is None:
+            lines = []
         # Assuming visualize method can also handle line visualization
         self.log(f'found {len(lines)} lines', level='debug')
         self.visualize(image, lines) # TODO: FIX, REMOVE

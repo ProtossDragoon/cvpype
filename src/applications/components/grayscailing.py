@@ -19,7 +19,7 @@ class GrayscailingComponent(BaseComponent):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_type=RGBImageType,
+            data_type=RGBImageType(),
             allow_copy=False,
             allow_change=False,
         )
@@ -27,7 +27,7 @@ class GrayscailingComponent(BaseComponent):
     outputs = [
         ComponentIOSpec(
             name='image',
-            data_type=GrayscaledImageType,
+            data_type=GrayscaledImageType(),
             allow_copy=True,
             allow_change=False,
         )

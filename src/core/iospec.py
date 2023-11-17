@@ -10,7 +10,7 @@ class ComponentIOSpec:
         allow_change: bool,
     ) -> None:
         assert type(name) is str
-        assert issubclass(data_type, BaseType)
+        assert isinstance(data_type, BaseType)
         assert type(allow_copy) is bool
         assert type(allow_change) is bool
         self.name = name

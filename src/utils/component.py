@@ -15,11 +15,11 @@ def run_component_with_singular_input_of_ImageType(
     output_specname: str = None,
 ):
     assert len(component.inputs) == 1
-    assert issubclass(
+    assert isinstance(
         component.inputs[0].data_type,
         ImageType
     ), (
-        f'`{component.inputs[0].data_type.__name__}` is not '
+        f'`{component.inputs[0].data_type.__class__}` is not '
         f'compatible with `{ImageType.__name__}`'
     )
     if output_path:
@@ -29,7 +29,7 @@ def run_component_with_singular_input_of_ImageType(
         else:
             assert len(component.outputs)
             output_idx = 0
-        assert issubclass(
+        assert isinstance(
             component.outputs[output_idx].data_type,
             ImageType
         )
@@ -55,7 +55,7 @@ def run_component_with_singular_input_of_ImageType(
 
     while cap.isOpened():
         ret, frame = cap.read()
-        if issubclass(
+        if isinstance(
             component.inputs[0].data_type,
             OpenCVGrayscaledImageType
         ):
@@ -69,7 +69,7 @@ def run_component_with_singular_input_of_ImageType(
             im = ret[output_idx]
             assert height == im.shape[0]
             assert width == im.shape[1]
-            if issubclass(
+            if isinstance(
                 component.outputs[output_idx].data_type,
                 OpenCVGrayscaledImageType
             ):

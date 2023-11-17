@@ -12,13 +12,13 @@ class CVLineOnCVImageVisualizer(LineOnImageVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_type=CVImageType,
+            data_type=CVImageType(),
             allow_copy=True,
             allow_change=False,
         ),
         ComponentIOSpec(
             name='lines',
-            data_type=OpenCVLinesType,
+            data_type=OpenCVLinesType(),
             allow_copy=False,
             allow_change=False,
         )

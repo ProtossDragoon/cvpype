@@ -12,12 +12,6 @@ class LineVisualizer(BaseVisualizer):
     ) -> None:
         super().__init__(name)
 
-    def visualize(
-        self,
-        image: ImageType,
-    ):
-        raise NotImplementedError
-
 
 class LineOnImageVisualizer(CombinedVisualizer):
     def __init__(
@@ -26,10 +20,3 @@ class LineOnImageVisualizer(CombinedVisualizer):
         is_operating: bool = True
     ) -> None:
         super().__init__(name)
-
-    def visualize(
-        self,
-        image: ImageType,
-        lines: LinesType
-    ):
-        raise NotImplementedError

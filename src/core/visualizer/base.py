@@ -20,11 +20,11 @@ class BaseVisualizer(ABC):
         *args,
         **kwargs,
     ):
-        assert len(self.inputs) == len(args)
+        assert len(self.inputs) == len(args), f'args: {args} != {self.inputs}'
         wrapped = []
-        for arg, input_type in zip(args, self.inputs):
-            input_type.data = arg
-            wrapped.append(input_type)
+        for arg, input_spec in zip(args, self.inputs):
+            input_spec.data_type.data = arg
+            wrapped.append(input_spec.data_type)
         return self.visualize(*wrapped, **kwargs)
 
     @abstractmethod

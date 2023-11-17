@@ -20,7 +20,7 @@ class EdgeDetectingComponent(BaseComponent):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_type=GrayscaledImageType,
+            data_type=GrayscaledImageType(),
             allow_copy=False,
             allow_change=False,
         )
@@ -28,7 +28,7 @@ class EdgeDetectingComponent(BaseComponent):
     outputs = [
         ComponentIOSpec(
             name='image',
-            data_type=EdgeImageType,
+            data_type=EdgeImageType(),
             allow_copy=True,
             allow_change=False,
         )
