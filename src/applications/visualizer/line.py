@@ -12,13 +12,13 @@ class CVLineOnCVImageVisualizer(LineOnImageVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_type=CVImageType(),
+            data_container=CVImageType(),
             allow_copy=True,
             allow_change=False,
         ),
         ComponentIOSpec(
             name='lines',
-            data_type=OpenCVLinesType(),
+            data_container=OpenCVLinesType(),
             allow_copy=False,
             allow_change=False,
         )
@@ -36,17 +36,16 @@ class CVLineOnCVImageVisualizer(LineOnImageVisualizer):
         image: CVImageType,
         lines: OpenCVLinesType
     ):
-        if self.is_operating:
-            v_image = cv2.cvtColor(image.data, cv2.COLOR_GRAY2BGR)
-            for line in lines.data:
-                for x1, y1, x2, y2 in line:
-                    cv2.line(
-                        v_image,
-                        (x1, y1), (x2, y2),
-                        (0, 0, 255), 2
-                    )
-            cv2.imshow(self.name, v_image)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                cv2.destroyWindow(self.name)
-                cv2.waitKey(1)
-                self.is_operating = False
+        v_image = cv2.cvtColor(image.data, cv2.COLOR_GRAY2BGR)
+        for line in lines.data:
+            for x1, y1, x2, y2 in line:
+                cv2.line(
+                    v_image,
+                    (x1, y1), (x2, y2),
+                    (0, 0, 255), 2
+                )
+        cv2.imshow(self.name, v_image)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            cv2.destroyWindow(self.name)
+            cv2.waitKey(1)
+            self.is_operating = False

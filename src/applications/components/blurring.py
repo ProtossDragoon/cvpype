@@ -19,7 +19,7 @@ class BlurringComponent(BaseComponent):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_type=GrayscaledImageType(),
+            data_container=GrayscaledImageType(),
             allow_copy=True,
             allow_change=False,
         )
@@ -27,7 +27,7 @@ class BlurringComponent(BaseComponent):
     outputs = [
         ComponentIOSpec(
             name='image',
-            data_type=EdgeImageType(),
+            data_container=EdgeImageType(),
             allow_copy=True,
             allow_change=False,
         )
@@ -47,7 +47,7 @@ class BlurringComponent(BaseComponent):
         image,
         sigma_color: int = 10,
         sigma_space: int = 10
-    ) -> list:
+    ) -> dict:
         blurred_image = cv2.bilateralFilter(
             image, -1,
             sigma_color,
@@ -55,7 +55,7 @@ class BlurringComponent(BaseComponent):
         )
         self.visualize(blurred_image)
         self.log('completed bilateral Gaussian blurring operation.', level='debug')
-        return [blurred_image]
+        return {'image': blurred_image}
 
 
 if __name__ == '__main__':

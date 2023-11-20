@@ -20,12 +20,14 @@ class BaseVisualizer(ABC):
         *args,
         **kwargs,
     ):
+        if not self.is_operating:
+            return
         assert len(self.inputs) == len(args), f'args: {args} != {self.inputs}'
         wrapped = []
         for arg, input_spec in zip(args, self.inputs):
-            input_spec.data_type.data = arg
-            wrapped.append(input_spec.data_type)
-        return self.visualize(*wrapped, **kwargs)
+            input_spec.data_container.data = arg
+            wrapped.append(input_spec.data_container)
+        self.visualize(*wrapped, **kwargs)
 
     @abstractmethod
     def visualize(self, *args, **kwargs):

@@ -20,7 +20,7 @@ class EdgeDetectingComponent(BaseComponent):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_type=GrayscaledImageType(),
+            data_container=GrayscaledImageType(),
             allow_copy=False,
             allow_change=False,
         )
@@ -28,7 +28,7 @@ class EdgeDetectingComponent(BaseComponent):
     outputs = [
         ComponentIOSpec(
             name='image',
-            data_type=EdgeImageType(),
+            data_container=EdgeImageType(),
             allow_copy=True,
             allow_change=False,
         )
@@ -48,7 +48,7 @@ class EdgeDetectingComponent(BaseComponent):
         image,
         threshold1: int = 100,
         threshold2: int = 200,
-    ) -> list:
+    ) -> dict:
         edge_image = cv2.Canny(
             image,
             threshold1,
@@ -56,7 +56,7 @@ class EdgeDetectingComponent(BaseComponent):
         )
         self.visualize(edge_image)
         self.log('completed edge detection operation.', level='debug')
-        return [edge_image]
+        return {'image': edge_image}
 
 
 if __name__ == '__main__':

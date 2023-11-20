@@ -16,10 +16,10 @@ def run_component_with_singular_input_of_ImageType(
 ):
     assert len(component.inputs) == 1
     assert isinstance(
-        component.inputs[0].data_type,
+        component.inputs[0].data_container,
         ImageType
     ), (
-        f'`{component.inputs[0].data_type.__class__}` is not '
+        f'`{type(component.inputs[0].data_container)}` is not '
         f'compatible with `{ImageType.__name__}`'
     )
     if output_path:
@@ -30,7 +30,7 @@ def run_component_with_singular_input_of_ImageType(
             assert len(component.outputs)
             output_idx = 0
         assert isinstance(
-            component.outputs[output_idx].data_type,
+            component.outputs[output_idx].data_container,
             ImageType
         )
 
@@ -56,7 +56,7 @@ def run_component_with_singular_input_of_ImageType(
     while cap.isOpened():
         ret, frame = cap.read()
         if isinstance(
-            component.inputs[0].data_type,
+            component.inputs[0].data_container,
             OpenCVGrayscaledImageType
         ):
             # NOTE: Every image slices from video
@@ -70,7 +70,7 @@ def run_component_with_singular_input_of_ImageType(
             assert height == im.shape[0]
             assert width == im.shape[1]
             if isinstance(
-                component.outputs[output_idx].data_type,
+                component.outputs[output_idx].data_container,
                 OpenCVGrayscaledImageType
             ):
                 # NOTE: Cannot convert into a color

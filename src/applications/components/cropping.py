@@ -6,7 +6,7 @@ from src.applications.visualizer.image import (
     CVImageVisualizer as ImageVisualizer
 )
 from src.applications.types.image import (
-    OpenCVGrayscaledImageType as GrayscaledImageType,
+    CVImageType as ImageType,
 )
 from src.utils.component import \
     run_component_with_singular_input_of_ImageType
@@ -17,7 +17,7 @@ class CroppingComponent(BaseComponent):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_type=GrayscaledImageType(),
+            data_container=ImageType(),
             allow_copy=False,
             allow_change=False,
         )
@@ -25,7 +25,7 @@ class CroppingComponent(BaseComponent):
     outputs = [
         ComponentIOSpec(
             name='image',
-            data_type=GrayscaledImageType(),
+            data_container=ImageType(),
             allow_copy=True,
             allow_change=False,
         )
@@ -40,12 +40,16 @@ class CroppingComponent(BaseComponent):
     ):
         super().__init__(do_logging)
 
-    def run(self, image, **kwargs) -> list:
+    def run(
+        self,
+        image,
+        **kwargs
+    ) -> dict:
         height = image.shape[0]
         cropped_image = image[int(height / 2):, :]
         self.visualize(cropped_image)
         self.log('completed cropping operation.', level='debug')
-        return [cropped_image]
+        return {'image': cropped_image}
 
 
 if __name__ == '__main__':

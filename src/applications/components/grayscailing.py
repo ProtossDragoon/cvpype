@@ -19,7 +19,7 @@ class GrayscailingComponent(BaseComponent):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_type=RGBImageType(),
+            data_container=RGBImageType(),
             allow_copy=False,
             allow_change=False,
         )
@@ -27,7 +27,7 @@ class GrayscailingComponent(BaseComponent):
     outputs = [
         ComponentIOSpec(
             name='image',
-            data_type=GrayscaledImageType(),
+            data_container=GrayscaledImageType(),
             allow_copy=True,
             allow_change=False,
         )
@@ -42,11 +42,14 @@ class GrayscailingComponent(BaseComponent):
     ):
         super().__init__(do_logging)
 
-    def run(self, image) -> list:
+    def run(
+        self,
+        image
+    ) -> dict:
         grayscale_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         self.visualize(grayscale_image)
         self.log('completed grayscale transformation.', level='debug')
-        return [grayscale_image]
+        return {'image': grayscale_image}
 
 
 if __name__ == '__main__':
