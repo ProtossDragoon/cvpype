@@ -1,9 +1,9 @@
 # Third Party
 import cv2
 
-# Projects
+# Project
 from src.core.iospec import ComponentIOSpec
-from src.applications.types.image import CVImageType
+from src.applications.types.image import OpenCVImageType
 from src.applications.types.line import OpenCVLinesType
 from src.core.visualizer.line import LineOnImageVisualizer
 
@@ -12,7 +12,7 @@ class CVLineOnCVImageVisualizer(LineOnImageVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_container=CVImageType(),
+            data_container=OpenCVImageType(),
             allow_copy=True,
             allow_change=False,
         ),
@@ -33,7 +33,7 @@ class CVLineOnCVImageVisualizer(LineOnImageVisualizer):
 
     def visualize(
         self,
-        image: CVImageType,
+        image: OpenCVImageType,
         lines: OpenCVLinesType
     ):
         v_image = cv2.cvtColor(image.data, cv2.COLOR_GRAY2BGR)

@@ -1,4 +1,3 @@
-from src.core.types.image import ImageType
 from src.core.visualizer.base import BaseVisualizer
 
 

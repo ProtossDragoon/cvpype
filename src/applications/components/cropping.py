@@ -6,7 +6,7 @@ from src.applications.visualizer.image import (
     CVImageVisualizer as ImageVisualizer
 )
 from src.applications.types.image import (
-    CVImageType as ImageType,
+    OpenCVImageType as ImageType,
 )
 from src.utils.component import \
     run_component_with_singular_input_of_ImageType

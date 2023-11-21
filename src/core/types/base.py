@@ -1,6 +1,3 @@
-from typing import Any
-
-
 class BaseType:
     def __init__(
         self,

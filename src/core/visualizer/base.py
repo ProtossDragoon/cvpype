@@ -14,6 +14,7 @@ class BaseVisualizer(ABC):
         super().__init__()
         self.name = name
         self.is_operating = is_operating
+        self.__did_runtime_init = False
 
     def __call__(
         self,
@@ -22,12 +23,18 @@ class BaseVisualizer(ABC):
     ):
         if not self.is_operating:
             return
+        if not self.__did_runtime_init:
+            self.runtime_init()
+            self.__did_runtime_init = True
         assert len(self.inputs) == len(args), f'args: {args} != {self.inputs}'
         wrapped = []
         for arg, input_spec in zip(args, self.inputs):
             input_spec.data_container.data = arg
             wrapped.append(input_spec.data_container)
         self.visualize(*wrapped, **kwargs)
+
+    def runtime_init(self):
+        pass
 
     @abstractmethod
     def visualize(self, *args, **kwargs):
