@@ -67,7 +67,7 @@ class BaseComponent(ABC):
             f'but {len(args)} input(s) ({args}) was given.'
         )
 
-        # converting
+        # unwrapping
         unwrapped_args = []
         for arg, input_ in zip(args, self.inputs):
             assert isinstance(arg, ComponentIOSpec), (
@@ -75,6 +75,7 @@ class BaseComponent(ABC):
                 'by class `ComponentIOSpec`'
             )
             arg = arg.data_container
+            arg.check_type()
             input_ = input_.data_container
             if isinstance(arg, InputType):
                 input_.data = arg.data
@@ -104,11 +105,12 @@ class BaseComponent(ABC):
             f'but {len(rets)} output(s) was given.'
         )
 
-        # converting
+        # wrapping
         wrapped_rets = []
         for name, ret in rets.items():
             output_spec = self.get_output_spec(name)
             output_spec.data_container.data = ret
+            output_spec.data_container.check_type()
             wrapped_rets.append(output_spec.data_container)
 
         return self.outputs
