@@ -34,12 +34,6 @@ class CroppingComponent(BaseComponent):
         name='CroppingComponent'
     )
 
-    def __init__(
-        self,
-        do_logging: bool = True
-    ):
-        super().__init__(do_logging)
-
     def run(
         self,
         image,

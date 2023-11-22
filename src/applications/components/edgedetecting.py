@@ -37,12 +37,6 @@ class EdgeDetectingComponent(BaseComponent):
         name='EdgeDetectingComponent'
     )
 
-    def __init__(
-        self,
-        do_logging: bool = True
-    ):
-        super().__init__(do_logging)
-
     def run(
         self,
         image,

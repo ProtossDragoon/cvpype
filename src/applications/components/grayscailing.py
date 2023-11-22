@@ -36,12 +36,6 @@ class GrayscailingComponent(BaseComponent):
         name='GrayscailingComponent'
     )
 
-    def __init__(
-        self,
-        do_logging: bool = False
-    ):
-        super().__init__(do_logging)
-
     def run(
         self,
         image

@@ -23,11 +23,11 @@ class BaseComponent(ABC):
 
     def __init__(
         self,
-        do_logging = True,
-        do_typechecking = True
+        do_logging: bool = True,
+        do_typecheck: bool = True,
     ):
         self.do_logging = do_logging
-        self.do_typecheck = do_typechecking
+        self.do_typecheck = do_typecheck
         self.logger = logging.getLogger(self.__class__.__name__)
 
     def __init_subclass__(cls) -> None:
@@ -169,7 +169,6 @@ class BaseComponent(ABC):
         raise NotImplementedError
 
     def log(self, message: str, level: str = 'info'):
-        """Log a message with the given level."""
         if self.do_logging:
             getattr(self.logger, level.lower(), self.logger.info)(message)
 

@@ -40,12 +40,6 @@ class LineFindingComponent(BaseComponent):
         name='LineFindingComponent'
     )
 
-    def __init__(
-        self,
-        do_logging: bool = True
-    ):
-        super().__init__(do_logging)
-
     def run(
         self,
         image,
@@ -63,9 +57,8 @@ class LineFindingComponent(BaseComponent):
         )
         if lines is None:
             lines = []
-        # Assuming visualize method can also handle line visualization
         self.log(f'found {len(lines)} lines', level='debug')
-        self.visualize(image, lines) # TODO: FIX, REMOVE
+        self.visualize(image, lines)
         return {'lines': lines}
 
 
