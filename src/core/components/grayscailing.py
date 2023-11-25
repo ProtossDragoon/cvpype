@@ -4,11 +4,11 @@ from src.core.components.base import BaseComponent
 from src.core.iospec import ComponentIOSpec
 from src.applications.visualizer.image import (
     CVImageVisualizer as ImageVisualizer
-)
+) # FIXME: Application layer should not be called by core layer
 from src.applications.types.image import (
     OpenCVRGBImageType as RGBImageType,
     OpenCVGrayscaledImageType as GrayscaledImageType,
-)
+) # FIXME: Application layer should not be called by core layer
 from src.utils.component import \
     run_component_with_singular_input_of_ImageType
 

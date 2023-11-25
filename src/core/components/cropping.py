@@ -1,15 +1,14 @@
-import cv2
-
 from src.core.components.base import BaseComponent
 from src.core.iospec import ComponentIOSpec
 from src.applications.visualizer.image import (
     CVImageVisualizer as ImageVisualizer
-)
+) # FIXME: Application layer should not be called by core layer
 from src.applications.types.image import (
     OpenCVImageType as ImageType,
-)
+) # FIXME: Application layer should not be called by core layer
 from src.utils.component import \
     run_component_with_singular_input_of_ImageType
+
 
 class CroppingComponent(BaseComponent):
     """Crops the upper side (from 0 to y) of an image.

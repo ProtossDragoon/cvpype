@@ -4,23 +4,23 @@ from src.core.components.base import BaseComponent
 from src.core.iospec import ComponentIOSpec
 from src.applications.visualizer.image import (
     CVImageVisualizer as ImageVisualizer
-)
+) # FIXME: Application layer should not be called by core layer
 from src.applications.types.image import (
     OpenCVGrayscaledImageType as GrayscaledImageType,
     OpenCVEdgeImageType as EdgeImageType
-)
+) # FIXME: Application layer should not be called by core layer
 from src.utils.component import \
     run_component_with_singular_input_of_ImageType
 
 
-class BilateralBlurringComponent(BaseComponent):
-    """Applies bilateral Gaussian blurring to a grayscaled image.
+class EdgeDetectingComponent(BaseComponent):
+    """Applies edge detection to a grayscaled image.
     """
     inputs = [
         ComponentIOSpec(
             name='image',
             data_container=GrayscaledImageType(),
-            allow_copy=True,
+            allow_copy=False,
             allow_change=False,
         )
     ]
@@ -33,30 +33,30 @@ class BilateralBlurringComponent(BaseComponent):
         )
     ]
     visualizer = ImageVisualizer(
-        name='BilateralBlurringComponent'
+        name='EdgeDetectingComponent'
     )
 
     def run(
         self,
         image,
-        sigma_color: int = 10,
-        sigma_space: int = 10
+        threshold1: int = 100,
+        threshold2: int = 200,
     ) -> dict:
-        blurred_image = cv2.bilateralFilter(
-            image, -1,
-            sigma_color,
-            sigma_space
+        edge_image = cv2.Canny(
+            image,
+            threshold1,
+            threshold2
         )
-        self.visualize(blurred_image)
-        self.log('completed bilateral Gaussian blurring operation.', level='debug')
-        return {'image': blurred_image}
+        self.visualize(edge_image)
+        self.log('completed edge detection operation.', level='debug')
+        return {'image': edge_image}
 
 
 if __name__ == '__main__':
-    component = BilateralBlurringComponent()
+    component = EdgeDetectingComponent()
     import os
     video_path = os.path.join('data', 'project_grayscale.avi')
     run_component_with_singular_input_of_ImageType(
         component, video_path,
-        output_path=os.path.join('data', 'project_blurred.avi')
+        output_path=os.path.join('data', 'project_edge.avi')
     )
