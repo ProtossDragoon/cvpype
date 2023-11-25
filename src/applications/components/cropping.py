@@ -12,7 +12,7 @@ from src.utils.component import \
     run_component_with_singular_input_of_ImageType
 
 class CroppingComponent(BaseComponent):
-    """Crops the lower half of a grayscaled image.
+    """Crops the upper side (from 0 to y) of an image.
     """
     inputs = [
         ComponentIOSpec(
@@ -34,13 +34,21 @@ class CroppingComponent(BaseComponent):
         name='CroppingComponent'
     )
 
+    def __init__(
+        self,
+        y: int = None
+    ):
+        super().__init__()
+        self.y = y
+
     def run(
         self,
-        image,
-        **kwargs
+        image
     ) -> dict:
         height = image.shape[0]
-        cropped_image = image[int(height / 2):, :]
+        if self.y is None:
+            self.y = int(height / 2)
+        cropped_image = image[self.y:, :]
         self.visualize(cropped_image)
         self.log('completed cropping operation.', level='debug')
         return {'image': cropped_image}
