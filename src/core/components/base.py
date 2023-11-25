@@ -8,6 +8,7 @@ from src.core.visualizer.base import BaseVisualizer
 from src.core.iospec import ComponentIOSpec
 from src.core.types.base import BaseType
 from src.core.types.input import InputType
+from src.core.types.output import NoOutput
 
 # Configure the root logger
 logging.basicConfig(level=logging.INFO)
@@ -94,16 +95,31 @@ class BaseComponent(ABC):
         rets = self.run(*unwrapped_args, **kwargs)
 
         # output type checking
-        assert type(rets) is dict, (
-            'Return value of `run()` method should be dictionary '
-            f'that contains keys among {[e.name for e in self.outputs]}, '
-            f'but now the type of the return value is {type(rets)}'
-        )
-        assert len(rets) == len(self.outputs), (
-            f'You defined {len(self.outputs)} outputs '
-            f'(types: {[e.data_container for e in self.outputs]}), '
-            f'but {len(rets)} output(s) was given.'
-        )
+        if rets:
+            assert type(rets) is dict, (
+                'Return value of `run()` method should be dictionary '
+                f'that contains keys among {[e.name for e in self.outputs]}, '
+                f'but now the type of the return value is {type(rets)}'
+            )
+            assert len(rets) == len(self.outputs), (
+                f'You defined {len(self.outputs)} outputs '
+                f'(types: {[e.data_container for e in self.outputs]}), '
+                f'but {len(rets)} output(s) was given.'
+            )
+        else:
+            assert len(self.outputs) == 1, (
+                "If you don't intend to return any output, "
+                'you should not define an output spec. '
+                'But currently, the output specs are: '
+                f'{[e.data_container for e in self.outputs]}'
+            )
+            assert isinstance(self.outputs[-1].data_container, NoOutput), (
+                "If you don't intend to return any output, "
+                'you should not define any output spec other than `NoOutput`. '
+                'But currently, the output specs are: '
+                f'{[e.data_container for e in self.outputs]}'
+            )
+            rets = {}
 
         # wrapping
         wrapped_rets = []
@@ -113,6 +129,8 @@ class BaseComponent(ABC):
             output_spec.data_container.check_type()
             wrapped_rets.append(output_spec.data_container)
 
+        if len(self.outputs) == 1:
+            return self.outputs[0]
         return self.outputs
 
     def get_input_spec(
@@ -159,13 +177,6 @@ class BaseComponent(ABC):
 
     @abstractmethod
     def run(self, *args, **kwargs) -> dict:
-        """컴포넌트를 실행합니다.
-
-        `args`는 클래스의 `inputs`리스트에 명시된 스펙의 `data_container`이
-        순차적으로 입력될 것을 가정합니다. 반환형은 `outputs`리스트에
-        명시된 스펙의 리스트입니다. `kwargs` 파라미터를 통해
-        런타임 인자들을 입력받을 수 있습니다.
-        """
         raise NotImplementedError
 
     def log(self, message: str, level: str = 'info'):

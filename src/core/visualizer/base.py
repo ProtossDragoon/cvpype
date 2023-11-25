@@ -1,6 +1,12 @@
+# Built-in
+import logging
 from abc import ABC, abstractmethod
 
+# Project
 from src.core.iospec import ComponentIOSpec
+
+# Configure the root logger
+logging.basicConfig(level=logging.INFO)
 
 
 class BaseVisualizer(ABC):
@@ -14,6 +20,7 @@ class BaseVisualizer(ABC):
         super().__init__()
         self.name = name
         self.is_operating = is_operating
+        self.logger = logging.getLogger(self.__class__.__name__)
         self.__did_runtime_init = False
 
     def __call__(

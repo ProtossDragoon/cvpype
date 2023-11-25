@@ -14,17 +14,18 @@ class InputsComponent():
         **kwargs: Any
     ) -> Any:
         wrapped_args = []
-        for i, arg in enumerate(args):
-            assert not isinstance(arg, ComponentIOSpec), (
-                'Input component cannot be used '
-                'over `ComponentIOSpec` input.'
-            )
-            iospec = ComponentIOSpec(
-                name='input',
-                data_container=InputType(),
-                allow_copy=True,
-                allow_change=True,
-            )
-            iospec.data_container.data = arg
-            wrapped_args.append(iospec)
+        for arg in args:
+            if isinstance(arg, ComponentIOSpec):
+                wrapped_args.append(arg)
+            else:
+                iospec = ComponentIOSpec(
+                    name='input',
+                    data_container=InputType(),
+                    allow_copy=True,
+                    allow_change=True,
+                )
+                iospec.data_container.data = arg
+                wrapped_args.append(iospec)
+        if len(wrapped_args) == 1:
+            wrapped_args = wrapped_args[0]
         return wrapped_args
