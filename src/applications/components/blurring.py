@@ -13,7 +13,7 @@ from src.utils.component import \
     run_component_with_singular_input_of_ImageType
 
 
-class BlurringComponent(BaseComponent):
+class BilateralBlurringComponent(BaseComponent):
     """Applies bilateral Gaussian blurring to a grayscaled image.
     """
     inputs = [
@@ -33,7 +33,7 @@ class BlurringComponent(BaseComponent):
         )
     ]
     visualizer = ImageVisualizer(
-        name='BlurringComponent'
+        name='BilateralBlurringComponent'
     )
 
     def run(
@@ -53,7 +53,7 @@ class BlurringComponent(BaseComponent):
 
 
 if __name__ == '__main__':
-    component = BlurringComponent()
+    component = BilateralBlurringComponent()
     import os
     video_path = os.path.join('data', 'project_grayscale.avi')
     run_component_with_singular_input_of_ImageType(
