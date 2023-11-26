@@ -1,16 +1,24 @@
+# Built-in
 from math import pi
 
+# Third party
 import cv2
 
-from cvpype.python.core.components.base import BaseComponent
-from cvpype.python.core.iospec import ComponentIOSpec
-from cvpype.python.applications.visualizer.line import (
-    CVLineOnCVImageVisualizer as LineOnImageVisualizer
-)
+# Project-Types
 from cvpype.python.core.types.image import EdgeImageType
 from cvpype.python.applications.types.line import (
     OpenCVLinesType as LinesType,
 )
+
+# Project-Components
+from cvpype.python.core.components.base import BaseComponent
+
+# Project-Visualizers
+from cvpype.python.applications.visualizer.line import (
+    CVLineOnCVImageVisualizer as LineOnImageVisualizer
+)
+
+from cvpype.python.core.iospec import ComponentIOSpec
 from cvpype.python.utils.component import \
     run_component_with_singular_input_of_ImageType
 

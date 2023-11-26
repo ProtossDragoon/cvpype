@@ -1,16 +1,20 @@
+# Third party
 import cv2
 import numpy as np
 
-from cvpype.python.core.components.base import BaseComponent
-from cvpype.python.core.iospec import ComponentIOSpec
-from cvpype.python.applications.visualizer.coord import (
-    CoordsHistogramVisualizer
-)
+# Project-Types
 from cvpype.python.core.types.image import RGBImageType
 from cvpype.python.applications.types.coord import (
     OpenCVCoordinatesType as CoordinatesType
 )
 
+# Project-Components
+from cvpype.python.core.components.base import BaseComponent
+from cvpype.python.applications.visualizer.coord import (
+    CoordsHistogramVisualizer
+)
+
+from cvpype.python.core.iospec import ComponentIOSpec
 from cvpype.python.utils.component import \
     run_component_with_singular_input_of_ImageType
 

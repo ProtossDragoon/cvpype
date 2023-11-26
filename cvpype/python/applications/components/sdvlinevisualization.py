@@ -1,12 +1,16 @@
-from cvpype.python.core.iospec import ComponentIOSpec
+# Project-Types
 from cvpype.python.core.types.output import NoOutput
-
-from cvpype.python.core.components.base import BaseComponent
 from cvpype.python.core.types.image import RGBImageType
 from cvpype.python.applications.types.line import OpenCVLinesType as LinesType
 from cvpype.python.applications.types.coord import OpenCVCoordinatesType as CoordinatesType
 
+# Project-Components
+from cvpype.python.core.components.base import BaseComponent
+
+# Project-Visualizers
 from cvpype.python.applications.visualizer.sdvline import SDVLineAndEdgePairVisualizer
+
+from cvpype.python.core.iospec import ComponentIOSpec
 
 
 class SDVLineVisualizationComponent(BaseComponent):
