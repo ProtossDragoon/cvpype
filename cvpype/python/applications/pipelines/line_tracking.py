@@ -20,18 +20,13 @@ def get_line_tracking_pipeline(
    roi_y: int,
    image_h: int
 ):
-    assert image_h > crop_y_end
-    assert crop_y < roi_y < crop_y_end
-    assert crop_y_end > crop_y
-    assert image_h > roi_y
-    assert roi_y > crop_y
+    assert crop_y < roi_y < crop_y_end <= image_h
 
     inputs = InputsComponent()
     grayscailing = GrayscailingComponent()
     cropping = CroppingComponent(
         y=crop_y,
         y_end=crop_y_end,
-        x_end=300
     )
     cropping.change_output_type('image', OpenCVRGBImageType)
     blurring = BilateralBlurringComponent()
