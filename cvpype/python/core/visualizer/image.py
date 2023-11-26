@@ -30,7 +30,8 @@ class ImageVisualizer(BaseVisualizer):
 
     def __call__(self, *args, **kwargs):
         ret = super().__call__(*args, **kwargs)
-        self.show(ret)
+        if self.is_operating:
+            self.show(ret)
 
     def paint(
         self,
@@ -43,7 +44,7 @@ class ImageVisualizer(BaseVisualizer):
         image
     ):
         cv2.imshow(self.name, image)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        if cv2.waitKey(1) == ord('q'):
             cv2.destroyWindow(self.name)
             cv2.waitKey(1)
             self.is_operating = False

@@ -20,7 +20,8 @@ class MatPltVisualizer(BaseVisualizer):
         **kwargs
     ):
         super().__call__(*args, **kwargs)
-        self.draw()
+        if self.is_operating:
+            self.draw()
 
     def draw(
         self,
