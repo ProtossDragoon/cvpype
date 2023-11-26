@@ -123,6 +123,8 @@ class CoordsHistogramVisualizer(HistogramVisualizer):
         parse_history_fn: Callable,
     ):
         li = [parse_fn(*coord) for coord in coords.data]
+        if not li:
+            return
         self.history.append(parse_history_fn(li))
 
         # histogram
