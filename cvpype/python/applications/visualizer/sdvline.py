@@ -3,17 +3,17 @@ import cv2
 
 # Project
 from cvpype.python.core.iospec import ComponentIOSpec
-from cvpype.python.applications.types.image import OpenCVRGBImageType
+from cvpype.python.core.types.image import RGBImageType
+from cvpype.python.core.visualizer.image import ImageVisualizer
 from cvpype.python.applications.types.line import OpenCVLinesType
 from cvpype.python.applications.types.coord import OpenCVCoordinatesType
-from cvpype.python.core.visualizer.base import BaseVisualizer
 
 
-class SDVLineAndEdgePairVisualizer(BaseVisualizer):
+class SDVLineAndEdgePairVisualizer(ImageVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_container=OpenCVRGBImageType(),
+            data_container=RGBImageType(),
             allow_copy=True,
             allow_change=False,
         ),
@@ -40,9 +40,9 @@ class SDVLineAndEdgePairVisualizer(BaseVisualizer):
         self.y_origin = 0
         self.roi_y = 0
 
-    def visualize(
+    def paint(
         self,
-        image: OpenCVRGBImageType,
+        image: RGBImageType,
         lines: OpenCVLinesType,
         intersections: OpenCVCoordinatesType
     ):
@@ -94,8 +94,4 @@ class SDVLineAndEdgePairVisualizer(BaseVisualizer):
                 1,
                 cv2.LINE_AA,
             )
-        cv2.imshow(self.name, v_image)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            cv2.destroyWindow(self.name)
-            cv2.waitKey(1)
-            self.is_operating = False
+        return v_image

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from cvpype.python.core.visualizer.base import BaseVisualizer
 
 
-class HistogramVisualizer(BaseVisualizer):
+class MatPltVisualizer(BaseVisualizer):
     def __init__(
         self,
         name: str,
@@ -13,6 +13,21 @@ class HistogramVisualizer(BaseVisualizer):
     ) -> None:
         super().__init__(name, is_operating)
         self.fig = plt.figure()
+
+    def __call__(
+        self,
+        *args,
+        **kwargs
+    ):
+        super().__call__(*args, **kwargs)
+        self.draw()
+
+    def draw(
+        self,
+        *args,
+        **kwargs
+    ):
+        self.fig.canvas.draw()
 
     def runtime_init(
         self

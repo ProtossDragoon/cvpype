@@ -2,9 +2,7 @@ import numpy as np
 
 from cvpype.python.core.components.base import BaseComponent
 from cvpype.python.core.iospec import ComponentIOSpec
-from cvpype.python.applications.types.image import (
-    OpenCVEdgeImageType as EdgeImageType
-)
+from cvpype.python.core.types.image import EdgeImageType
 from cvpype.python.applications.types.coord import (
     OpenCVCoordinatesType as CoordinatesType
 )

@@ -38,24 +38,19 @@ class BaseVisualizer(ABC):
         for arg, input_spec in zip(args, self.inputs):
             input_spec.data_container.data = arg
             wrapped.append(input_spec.data_container)
-        self.visualize(*wrapped, **kwargs)
+        return self.paint(*wrapped, **kwargs)
 
-    def runtime_init(self):
+    def runtime_init(
+        self,
+        *args,
+        **kwargs
+    ):
         pass
 
     @abstractmethod
-    def visualize(self, *args, **kwargs):
-        raise NotImplementedError
-
-
-class CombinedVisualizer(BaseVisualizer):
-    def __init__(
+    def paint(
         self,
-        name: str,
-        is_operating: bool = True
-    ) -> None:
-        super().__init__(name, is_operating)
-
-    @abstractmethod
-    def visualize(self, *args, **kwargs):
+        *args,
+        **kwargs
+    ):
         raise NotImplementedError

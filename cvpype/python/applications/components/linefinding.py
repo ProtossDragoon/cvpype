@@ -7,9 +7,7 @@ from cvpype.python.core.iospec import ComponentIOSpec
 from cvpype.python.applications.visualizer.line import (
     CVLineOnCVImageVisualizer as LineOnImageVisualizer
 )
-from cvpype.python.applications.types.image import (
-    OpenCVEdgeImageType as EdgeImageType,
-)
+from cvpype.python.core.types.image import EdgeImageType
 from cvpype.python.applications.types.line import (
     OpenCVLinesType as LinesType,
 )

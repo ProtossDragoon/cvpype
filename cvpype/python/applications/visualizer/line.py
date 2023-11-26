@@ -3,16 +3,16 @@ import cv2
 
 # Project
 from cvpype.python.core.iospec import ComponentIOSpec
-from cvpype.python.applications.types.image import OpenCVImageType
+from cvpype.python.core.visualizer.image import ImageVisualizer
+from cvpype.python.core.types.image import ImageType
 from cvpype.python.applications.types.line import OpenCVLinesType
-from cvpype.python.core.visualizer.line import LineOnImageVisualizer
 
 
-class CVLineOnCVImageVisualizer(LineOnImageVisualizer):
+class CVLineOnCVImageVisualizer(ImageVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_container=OpenCVImageType(),
+            data_container=ImageType(),
             allow_copy=True,
             allow_change=False,
         ),
@@ -24,16 +24,9 @@ class CVLineOnCVImageVisualizer(LineOnImageVisualizer):
         )
     ]
 
-    def __init__(
+    def paint(
         self,
-        name: str,
-        is_operating: bool = True
-    ) -> None:
-        super().__init__(name, is_operating)
-
-    def visualize(
-        self,
-        image: OpenCVImageType,
+        image: ImageType,
         lines: OpenCVLinesType
     ):
         v_image = cv2.cvtColor(image.data, cv2.COLOR_GRAY2BGR)
@@ -44,8 +37,4 @@ class CVLineOnCVImageVisualizer(LineOnImageVisualizer):
                     (x1, y1), (x2, y2),
                     (0, 0, 255), 2
                 )
-        cv2.imshow(self.name, v_image)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            cv2.destroyWindow(self.name)
-            cv2.waitKey(1)
-            self.is_operating = False
+        return v_image

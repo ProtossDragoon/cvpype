@@ -2,7 +2,7 @@ from cvpype.python.core.iospec import ComponentIOSpec
 from cvpype.python.core.types.output import NoOutput
 
 from cvpype.python.core.components.base import BaseComponent
-from cvpype.python.applications.types.image import OpenCVRGBImageType as RGBImageType
+from cvpype.python.core.types.image import RGBImageType
 from cvpype.python.applications.types.line import OpenCVLinesType as LinesType
 from cvpype.python.applications.types.coord import OpenCVCoordinatesType as CoordinatesType
 

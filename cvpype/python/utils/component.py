@@ -7,7 +7,7 @@ import cv2
 # Project
 from cvpype.python.core.components.base import BaseComponent
 from cvpype.python.core.types.image import ImageType
-from cvpype.python.applications.types.image import OpenCVGrayscaledImageType
+from cvpype.python.core.types.image import GrayscaledImageType
 
 
 def run_component_with_singular_input_of_ImageType(
@@ -60,7 +60,7 @@ def run_component_with_singular_input_of_ImageType(
         ret, frame = cap.read()
         if isinstance(
             component.inputs[0].data_container,
-            OpenCVGrayscaledImageType
+            GrayscaledImageType
         ):
             # NOTE: Every image slices from video
             # has color palette.
@@ -74,7 +74,7 @@ def run_component_with_singular_input_of_ImageType(
             assert width == im.shape[1]
             if isinstance(
                 component.outputs[output_idx].data_container,
-                OpenCVGrayscaledImageType
+                GrayscaledImageType
             ):
                 # NOTE: Cannot convert into a color
                 # video with a gray scaled image

@@ -2,13 +2,8 @@ import cv2
 
 from cvpype.python.core.components.base import BaseComponent
 from cvpype.python.core.iospec import ComponentIOSpec
-from cvpype.python.applications.visualizer.image import (
-    CVImageVisualizer as ImageVisualizer
-) # FIXME: Application layer should not be called by core layer
-from cvpype.python.applications.types.image import (
-    OpenCVRGBImageType as RGBImageType,
-    OpenCVGrayscaledImageType as GrayscaledImageType,
-) # FIXME: Application layer should not be called by core layer
+from cvpype.python.core.visualizer.image import ImageVisualizer
+from cvpype.python.core.types.image import RGBImageType, GrayscaledImageType
 from cvpype.python.utils.component import \
     run_component_with_singular_input_of_ImageType
 

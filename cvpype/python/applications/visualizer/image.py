@@ -5,49 +5,20 @@ import matplotlib.pyplot as plt
 
 # Project
 from cvpype.python.core.iospec import ComponentIOSpec
-from cvpype.python.applications.types.image import (
-    OpenCVImageType,
-    OpenCVRGBImageType,
-    OpenCVHSVImageType,
-    OpenCVGrayscaledImageType
+from cvpype.python.core.types.image import (
+    ImageType,
+    RGBImageType,
+    HSVImageType,
+    GrayscaledImageType
 )
-from cvpype.python.core.visualizer.image import ImageVisualizer
-from cvpype.python.core.visualizer.hist import HistogramVisualizer
+from cvpype.python.core.visualizer.matplt import MatPltVisualizer
 
 
-class CVImageVisualizer(ImageVisualizer):
+class CVRGBImageHistogramVisualizer(MatPltVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_container=OpenCVImageType(),
-            allow_copy=False,
-            allow_change=False,
-        )
-    ]
-
-    def __init__(
-        self,
-        name: str,
-        is_operating: bool = True
-    ) -> None:
-        super().__init__(name, is_operating)
-
-    def visualize(
-        self,
-        image: OpenCVImageType
-    ):
-        cv2.imshow(self.name, image.data)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            cv2.destroyWindow(self.name)
-            cv2.waitKey(1)
-            self.is_operating = False
-
-
-class CVRGBImageHistogramVisualizer(HistogramVisualizer):
-    inputs = [
-        ComponentIOSpec(
-            name='image',
-            data_container=OpenCVRGBImageType(),
+            data_container=RGBImageType(),
             allow_copy=False,
             allow_change=False,
         )
@@ -82,11 +53,10 @@ class CVRGBImageHistogramVisualizer(HistogramVisualizer):
         self.ax.set_ylim(0, 1)
         self.ax.legend()
         plt.ion()
-        # plt.show()
 
-    def visualize(
+    def paint(
         self,
-        image: OpenCVImageType
+        image: ImageType
     ):
         (b, g, r) = cv2.split(image)
         n_pixels = np.prod(image.shape[:2])
@@ -96,14 +66,13 @@ class CVRGBImageHistogramVisualizer(HistogramVisualizer):
         self.line_r.set_ydata(histogram_r)
         self.line_g.set_ydata(histogram_g)
         self.line_b.set_ydata(histogram_b)
-        self.fig.canvas.draw()
 
 
-class CVGrayScaledImageHistogramVisualizer(HistogramVisualizer):
+class CVGrayScaledImageHistogramVisualizer(MatPltVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_container=OpenCVGrayscaledImageType(),
+            data_container=GrayscaledImageType(),
             allow_copy=False,
             allow_change=False,
         )
@@ -127,23 +96,21 @@ class CVGrayScaledImageHistogramVisualizer(HistogramVisualizer):
         self.ax.set_ylim(0, 1)
         self.ax.legend()
         plt.ion()
-        # plt.show()
 
-    def visualize(
+    def paint(
         self,
-        image: OpenCVImageType
+        image: ImageType
     ):
         n_pixels = np.prod(image.shape[:2])
         histogram = cv2.calcHist([image], [0], None, [self.bins], [0, 255]) / n_pixels
         self.line_gray.set_ydata(histogram)
-        self.fig.canvas.draw()
 
 
-class CVHSVImageHistogramVisualizer(HistogramVisualizer):
+class CVHSVImageHistogramVisualizer(MatPltVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_container=OpenCVHSVImageType(),
+            data_container=ImageType(),
             allow_copy=False,
             allow_change=False,
         )
@@ -178,11 +145,10 @@ class CVHSVImageHistogramVisualizer(HistogramVisualizer):
         self.ax.set_ylim(0, 1)
         self.ax.legend()
         plt.ion()
-        # plt.show()
 
-    def visualize(
+    def paint(
         self,
-        image: OpenCVImageType
+        image: ImageType
     ):
         (h, s, v) = cv2.split(image)
         n_pixels = np.prod(image.shape[:2])
@@ -192,4 +158,3 @@ class CVHSVImageHistogramVisualizer(HistogramVisualizer):
         self.lineH.set_ydata(histogram_h)
         self.lineS.set_ydata(histogram_s)
         self.lineV.set_ydata(histogram_v)
-        self.fig.canvas.draw()

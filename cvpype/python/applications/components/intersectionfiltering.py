@@ -6,9 +6,7 @@ from cvpype.python.core.iospec import ComponentIOSpec
 from cvpype.python.applications.visualizer.coord import (
     CoordsHistogramVisualizer
 )
-from cvpype.python.applications.types.image import (
-    OpenCVRGBImageType as RGBImageType,
-)
+from cvpype.python.core.types.image import RGBImageType
 from cvpype.python.applications.types.coord import (
     OpenCVCoordinatesType as CoordinatesType
 )

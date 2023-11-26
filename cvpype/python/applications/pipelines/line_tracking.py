@@ -1,5 +1,5 @@
 # Project-Types
-from cvpype.python.applications.types.image import OpenCVRGBImageType
+from cvpype.python.core.types.image import RGBImageType
 
 # Project-Components
 from cvpype.python.core.components.inputs import InputsComponent
@@ -28,7 +28,7 @@ def get_line_tracking_pipeline(
         y=crop_y,
         y_end=crop_y_end,
     )
-    cropping.change_output_type('image', OpenCVRGBImageType)
+    cropping.change_output_type('image', RGBImageType)
     blurring = BilateralBlurringComponent()
     edge_detecting = EdgeDetectingComponent()
     line_finding = LineFindingComponent()

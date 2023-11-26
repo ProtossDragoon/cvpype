@@ -9,18 +9,18 @@ import matplotlib.pyplot as plt
 
 # Project
 from cvpype.python.core.iospec import ComponentIOSpec
-from cvpype.python.applications.types.image import OpenCVImageType
+from cvpype.python.core.types.image import ImageType
 from cvpype.python.core.types.coord import CoordinatesType
 from cvpype.python.applications.types.coord import OpenCVCoordinatesType
-from cvpype.python.core.visualizer.coord import CoordinatesVisualizer
-from cvpype.python.core.visualizer.hist import HistogramVisualizer
+from cvpype.python.core.visualizer.image import ImageVisualizer
+from cvpype.python.core.visualizer.matplt import MatPltVisualizer
 
 
-class CVCoordsOnCVImageVisualizer(CoordinatesVisualizer):
+class CVCoordsOnCVImageVisualizer(ImageVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
-            data_container=OpenCVImageType(),
+            data_container=ImageType(),
             allow_copy=True,
             allow_change=False,
         ),
@@ -39,9 +39,9 @@ class CVCoordsOnCVImageVisualizer(CoordinatesVisualizer):
     ) -> None:
         super().__init__(name, is_operating)
 
-    def visualize(
+    def paint(
         self,
-        image: OpenCVImageType,
+        image: ImageType,
         coords: OpenCVCoordinatesType
     ):
         v_image = cv2.cvtColor(image.data, cv2.COLOR_GRAY2BGR)
@@ -60,15 +60,10 @@ class CVCoordsOnCVImageVisualizer(CoordinatesVisualizer):
                 color=(0, 0, 255),
                 thickness=1
             )
-
-        cv2.imshow(self.name, v_image)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            cv2.destroyWindow(self.name)
-            cv2.waitKey(1)
-            self.is_operating = False
+        return v_image
 
 
-class CoordsHistogramVisualizer(HistogramVisualizer):
+class CoordsHistogramVisualizer(MatPltVisualizer):
     inputs = [
         ComponentIOSpec(
             name='coordinates',
@@ -116,7 +111,7 @@ class CoordsHistogramVisualizer(HistogramVisualizer):
         )
         plt.ion()
 
-    def visualize(
+    def paint(
         self,
         coords: CoordinatesType,
         parse_fn: Callable,
@@ -173,6 +168,3 @@ class CoordsHistogramVisualizer(HistogramVisualizer):
         # line
         self.line.set_ydata(self.history)
         self.ax_line.set_ylim(0, max(self.history) * 2) #FIXME: slow
-
-        # draw
-        self.fig.canvas.draw()
