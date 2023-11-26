@@ -16,17 +16,22 @@ from cvpype.python.applications.pipelines.intersection_finding import get_inters
 
 def get_line_tracking_pipeline(
    crop_y: int,
+   crop_y_end: int,
    roi_y: int,
    image_h: int
 ):
-    assert image_h > crop_y
+    assert image_h > crop_y_end
+    assert crop_y < roi_y < crop_y_end
+    assert crop_y_end > crop_y
     assert image_h > roi_y
     assert roi_y > crop_y
 
     inputs = InputsComponent()
     grayscailing = GrayscailingComponent()
     cropping = CroppingComponent(
-        y=crop_y
+        y=crop_y,
+        y_end=crop_y_end,
+        x_end=300
     )
     cropping.change_output_type('image', OpenCVRGBImageType)
     blurring = BilateralBlurringComponent()

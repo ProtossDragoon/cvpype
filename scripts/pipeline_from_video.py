@@ -23,7 +23,8 @@ def run_pipeline(
 ) -> None:
     pipe = get_line_tracking_pipeline(
         crop_y=300,
-        roi_y=400,
+        crop_y_end=380,
+        roi_y=370,
         image_h=480
     )
     cap = cv2.VideoCapture(str(video_path))
