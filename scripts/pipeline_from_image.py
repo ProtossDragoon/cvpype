@@ -21,8 +21,9 @@ def run_pipeline(
     image_path: os.PathLike,
 ) -> None:
     pipe = get_line_tracking_pipeline(
-        crop_y=300,
-        roi_y=400,
+        crop_y=330,
+        crop_y_end=380,
+        roi_y=370,
         image_h=480
     )
     image = cv2.imread(str(image_path))

@@ -19,10 +19,10 @@ logger = logging.getLogger(__name__)
 
 def run_pipeline(
     video_path: os.PathLike,
-    playback_speed: float = 1.0,
+    playback_speed: float = 2.0,
 ) -> None:
     pipe = get_line_tracking_pipeline(
-        crop_y=300,
+        crop_y=330,
         crop_y_end=380,
         roi_y=370,
         image_h=480
@@ -53,4 +53,3 @@ if __name__ == '__main__':
     parser.add_argument('video_path', type=str, help='Path to the video file.')
     args = parser.parse_args()
     run_pipeline(args.video_path)
-

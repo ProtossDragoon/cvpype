@@ -43,9 +43,9 @@ class LineFindingComponent(BaseComponent):
     def run(
         self,
         image,
-        threshold: int = 100,
+        threshold: int = 40,
         minLineLength: int = 10,
-        maxLineGap: int = 250,
+        maxLineGap: int = 100,
     ) -> dict:
         lines = cv2.HoughLinesP(
             image,
