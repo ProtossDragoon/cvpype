@@ -7,10 +7,10 @@ import argparse
 import cv2
 
 # Project
-from src.utils import loggerutil
+from cvpype.python.utils import loggerutil
 
 # Project-Pipelines
-from src.applications.pipelines.line_tracking import get_line_tracking_pipeline
+from cvpype.python.applications.pipelines.line_tracking import get_line_tracking_pipeline
 
 
 loggerutil.set_basic_config(logging.INFO)
