@@ -9,7 +9,7 @@ from cvpype.python.applications.types.coord import OpenCVCoordinatesType
 from cvpype.python.core.visualizer.base import BaseVisualizer
 
 
-class SDVLineVisualizer(BaseVisualizer):
+class SDVLineAndEdgePairVisualizer(BaseVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
@@ -38,6 +38,7 @@ class SDVLineVisualizer(BaseVisualizer):
     ) -> None:
         super().__init__(name, is_operating)
         self.y_origin = 0
+        self.roi_y = 0
 
     def visualize(
         self,
@@ -55,15 +56,43 @@ class SDVLineVisualizer(BaseVisualizer):
                     (x1, y1), (x2, y2),
                     (0, 0, 255), 2
                 )
-        for coord in intersections.data:
+        palette = [
+            (0, 255, 0),
+            (50, 200, 0),
+            (100, 150, 0),
+            (150, 100, 0),
+            (200, 50, 0)
+        ]
+        for i, pair in enumerate(intersections.data, 1):
+            x1, x2 = pair
+            y = self.roi_y
             cv2.drawMarker(
                 v_image,
-                tuple(coord),
-                (0, 255, 0),
+                (x1, y),
+                palette[len(palette) % i],
                 markerType=cv2.MARKER_CROSS,
                 markerSize=10,
                 thickness=2,
                 line_type=cv2.LINE_AA
+            )
+            cv2.drawMarker(
+                v_image,
+                (x2, y),
+                palette[len(palette) % i],
+                markerType=cv2.MARKER_CROSS,
+                markerSize=10,
+                thickness=2,
+                line_type=cv2.LINE_AA
+            )
+            cv2.putText(
+                v_image,
+                f"({abs(x1-x2)})",
+                (x1, y - 10),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.5,
+                (255, 255, 255),
+                1,
+                cv2.LINE_AA,
             )
         cv2.imshow(self.name, v_image)
         if cv2.waitKey(1) & 0xFF == ord('q'):

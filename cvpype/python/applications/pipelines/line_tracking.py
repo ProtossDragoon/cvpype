@@ -33,12 +33,13 @@ def get_line_tracking_pipeline(
     edge_detecting = EdgeDetectingComponent()
     line_finding = LineFindingComponent()
     intersection_finding = get_intersection_finding_pipeline(
-        y=(roi_y-crop_y),
-        width_min=3,
-        width_max=30
+        roi_y=(roi_y-crop_y),
+        width_min=10,
+        width_max=50,
     )
     line_visualizing = SDVLineVisualizationComponent(
-        y_origin=crop_y
+        y_origin=crop_y,
+        roi_y=roi_y,
     )
 
     def fn(color_image):

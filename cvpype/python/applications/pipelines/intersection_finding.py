@@ -8,7 +8,7 @@ from cvpype.python.applications.components.intersectionfiltering import (
 
 
 def get_intersection_finding_pipeline(
-    y: int,
+    roi_y: int,
     width_min: int,
     width_max: int,
 ):
@@ -45,21 +45,21 @@ def get_intersection_finding_pipeline(
     """
     inputs = InputsComponent()
     intersection_finding = IntersectionFindingComponent(
-        y=y
+        y=roi_y
     )
     width_based_filtering = WidthBasedIntersectionFilteringComponent(
         width_min=width_min,
         width_max=width_max
     )
     color_based_filtering = ColorBasedIntersectionFilteringComponent(
-        y=y
+        y=roi_y
     )
 
     def fn(color_image, edge_image):
         color_image, edge_image = inputs(color_image, edge_image)
         intersections = intersection_finding(edge_image)
         intersections = width_based_filtering(intersections)
-        intersections = color_based_filtering(color_image, intersections)
+        # intersections = color_based_filtering(color_image, intersections)
         return intersections
 
     return fn

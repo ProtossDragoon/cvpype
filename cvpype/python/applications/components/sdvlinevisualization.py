@@ -6,7 +6,7 @@ from cvpype.python.applications.types.image import OpenCVRGBImageType as RGBImag
 from cvpype.python.applications.types.line import OpenCVLinesType as LinesType
 from cvpype.python.applications.types.coord import OpenCVCoordinatesType as CoordinatesType
 
-from cvpype.python.applications.visualizer.sdvline import SDVLineVisualizer
+from cvpype.python.applications.visualizer.sdvline import SDVLineAndEdgePairVisualizer
 
 
 class SDVLineVisualizationComponent(BaseComponent):
@@ -38,16 +38,18 @@ class SDVLineVisualizationComponent(BaseComponent):
             allow_change=False
         )
     ]
-    visualizer = SDVLineVisualizer(
+    visualizer = SDVLineAndEdgePairVisualizer(
         'SDVLineVisualizationComponent'
     )
 
     def __init__(
         self,
         y_origin: int,
+        roi_y: int,
     ):
         super().__init__()
         self.visualizer.y_origin = y_origin
+        self.visualizer.roi_y = roi_y
 
     def run(
         self,

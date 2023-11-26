@@ -56,7 +56,7 @@ class WidthBasedIntersectionFilteringComponent(BaseComponent):
             if self.width_min <= end_idx - start_idx <= self.width_max
         ]
         self.log(f'Intersections: {len(valid_pairs)}/{len(intersections)} '
-                 f'(after filtering / initial found)')
+                 f'(#filtered/#input)')
         self.visualize(
             intersections,
             parse_fn=(lambda x1, x2: abs(x1 - x2)),
@@ -92,7 +92,7 @@ class ColorBasedIntersectionFilteringComponent(BaseComponent):
     def __init__(
         self,
         y: int,
-        black_threshold: int = 170,  # FIXME: manual
+        black_threshold: int = 230,  # FIXME: manual
     ):
         super().__init__()
         self.y = y
@@ -120,6 +120,9 @@ class ColorBasedIntersectionFilteringComponent(BaseComponent):
 
             if black_pixels / (len(line_section) + 0.1) >= 0.5:
                 valid_black_pairs.append((start, end))
+
+        self.log(f'Intersections: {len(valid_black_pairs)}/{len(valid_pairs)} '
+                 f'(#filtered/#input)')
 
         return {'filtered_pairs': valid_black_pairs}
 
