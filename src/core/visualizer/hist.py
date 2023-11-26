@@ -17,8 +17,38 @@ class HistogramVisualizer(BaseVisualizer):
     def runtime_init(
         self
     ):
+        plt.show()
         try:
             self.fig.canvas.set_window_title(self.name)
         except AttributeError:
-            # FIXME: via logger
-            print("MacOS cannot set the title of matplotlib window.")
+            self.logger.warning(
+                'MacOS cannot set the title of matplotlib window.'
+            )
+
+    # FIXME: Dirty api
+    def xbound_proper_min(
+        self,
+        li: list
+    ):
+        return min(li)
+
+    # FIXME: Dirty api
+    def ybound_proper_min(
+        self,
+        li: list
+    ):
+        return 0
+
+    # FIXME: Dirty api
+    def xbound_proper_max(
+        self,
+        li: list
+    ):
+        return max(li)
+
+    # FIXME: Dirty api
+    def ybound_proper_max(
+        self,
+        li: list
+    ):
+        return len(li)
