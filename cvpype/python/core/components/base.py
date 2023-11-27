@@ -17,9 +17,9 @@ logger = logging.getLogger(__name__)
 
 # Base Component class
 class BaseComponent(ABC):
-    name: str
-    inputs: list[ComponentIOSpec]
-    outputs: list[ComponentIOSpec]
+    name: str # FIXME: 클래스 변수로 있으면 멀티코어 처리시 복잡함
+    inputs: list[ComponentIOSpec] # FIXME: 클래스 변수로 있으면 멀티코어 처리시 복잡함
+    outputs: list[ComponentIOSpec] # FIXME: 클래스 변수로 있으면 멀티코어 처리시 복잡함
     visualizer: BaseVisualizer
 
     def __init__(
@@ -176,7 +176,11 @@ class BaseComponent(ABC):
         spec.data_container.data = data
 
     @abstractmethod
-    def run(self, *args, **kwargs) -> dict:
+    def run(
+        self,
+        *args,
+        **kwargs
+    ) -> dict:
         raise NotImplementedError
 
     def log(self, message: str, level: str = 'info'):
