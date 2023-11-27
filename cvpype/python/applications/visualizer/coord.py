@@ -21,14 +21,10 @@ class CVCoordsOnCVImageVisualizer(ImageVisualizer):
         ComponentIOSpec(
             name='image',
             data_container=ImageType(),
-            allow_copy=True,
-            allow_change=False,
         ),
         ComponentIOSpec(
             name='coordinates',
             data_container=OpenCVCoordinatesType(),
-            allow_copy=False,
-            allow_change=False,
         )
     ]
 
@@ -68,8 +64,6 @@ class CoordsHistogramVisualizer(MatPltVisualizer):
         ComponentIOSpec(
             name='coordinates',
             data_container=CoordinatesType(),
-            allow_copy=False,
-            allow_change=False,
         )
     ]
 

@@ -15,16 +15,12 @@ class EdgeDetectingComponent(BaseComponent):
         ComponentIOSpec(
             name='image',
             data_container=GrayscaledImageType(),
-            allow_copy=False,
-            allow_change=False,
         )
     ]
     outputs = [
         ComponentIOSpec(
             name='image',
             data_container=EdgeImageType(),
-            allow_copy=True,
-            allow_change=False,
         )
     ]
     visualizer = ImageVisualizer(

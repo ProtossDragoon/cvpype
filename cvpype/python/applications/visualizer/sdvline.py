@@ -14,20 +14,14 @@ class SDVLineAndEdgePairVisualizer(ImageVisualizer):
         ComponentIOSpec(
             name='image',
             data_container=RGBImageType(),
-            allow_copy=True,
-            allow_change=False,
         ),
         ComponentIOSpec(
             name='lines',
             data_container=OpenCVLinesType(),
-            allow_copy=False,
-            allow_change=False,
         ),
         ComponentIOSpec(
             name='intersections',
             data_container=OpenCVCoordinatesType(),
-            allow_copy=True,
-            allow_change=False,
         )
     ]
 

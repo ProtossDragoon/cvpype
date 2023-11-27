@@ -13,16 +13,12 @@ class CroppingComponent(BaseComponent):
         ComponentIOSpec(
             name='image',
             data_container=ImageType(),
-            allow_copy=False,
-            allow_change=False,
         )
     ]
     outputs = [
         ComponentIOSpec(
             name='image',
             data_container=ImageType(),
-            allow_copy=True,
-            allow_change=False,
         )
     ]
     visualizer = ImageVisualizer(

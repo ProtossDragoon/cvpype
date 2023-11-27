@@ -18,28 +18,20 @@ class SDVLineVisualizationComponent(BaseComponent):
         ComponentIOSpec(
             name='image',
             data_container=RGBImageType(),
-            allow_copy=False,
-            allow_change=False,
         ),
         ComponentIOSpec(
             name='lines',
             data_container=LinesType(),
-            allow_copy=True,
-            allow_change=False,
         ),
         ComponentIOSpec(
             name='intersections',
             data_container=CoordinatesType(),
-            allow_copy=True,
-            allow_change=False,
         )
     ]
     outputs = [
         ComponentIOSpec(
             name='NoOutput',
             data_container=NoOutput(),
-            allow_copy=False,
-            allow_change=False
         )
     ]
     visualizer = SDVLineAndEdgePairVisualizer(

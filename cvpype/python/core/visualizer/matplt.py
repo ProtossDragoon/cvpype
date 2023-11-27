@@ -27,7 +27,7 @@ class MatPltVisualizer(BaseVisualizer):
         self,
         *args,
         **kwargs
-    ):
+    ) -> None:
         self.fig.canvas.draw()
 
     def runtime_init(

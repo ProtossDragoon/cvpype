@@ -24,16 +24,12 @@ class WidthBasedIntersectionFilteringComponent(BaseComponent):
         ComponentIOSpec(
             name='intersections',
             data_container=CoordinatesType(),
-            allow_copy=False,
-            allow_change=False,
         )
     ]
     outputs = [
         ComponentIOSpec(
             name='intersections',
             data_container=CoordinatesType(),
-            allow_copy=True,
-            allow_change=False,
         )
     ]
     visualizer = CoordsHistogramVisualizer(
@@ -72,22 +68,16 @@ class ColorBasedIntersectionFilteringComponent(BaseComponent):
         ComponentIOSpec(
             name='color_image',
             data_container=RGBImageType(),
-            allow_copy=False,
-            allow_change=False,
         ),
         ComponentIOSpec(
             name='valid_pairs',
             data_container=CoordinatesType(),
-            allow_copy=False,
-            allow_change=False,
         )
     ]
     outputs = [
         ComponentIOSpec(
             name='filtered_pairs',
             data_container=CoordinatesType(),
-            allow_copy=True,
-            allow_change=False,
         )
     ]
 

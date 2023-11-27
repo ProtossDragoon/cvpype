@@ -6,8 +6,8 @@ class ComponentIOSpec:
         self,
         name: str,
         data_container,
-        allow_copy: bool,
-        allow_change: bool,
+        allow_copy: bool = True,
+        allow_change: bool = True,
     ) -> None:
         assert type(name) is str
         assert isinstance(data_container, BaseType)

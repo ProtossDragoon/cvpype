@@ -30,16 +30,12 @@ class LineFindingComponent(BaseComponent):
         ComponentIOSpec(
             name='image',
             data_container=EdgeImageType(),
-            allow_copy=False,
-            allow_change=False,
         )
     ]
     outputs = [
         ComponentIOSpec(
             name='lines',
             data_container=LinesType(),
-            allow_copy=True,
-            allow_change=False,
         )
     ]
     visualizer = LineOnImageVisualizer(

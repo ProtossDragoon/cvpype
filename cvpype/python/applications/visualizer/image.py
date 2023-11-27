@@ -19,8 +19,6 @@ class CVRGBImageHistogramVisualizer(MatPltVisualizer):
         ComponentIOSpec(
             name='image',
             data_container=RGBImageType(),
-            allow_copy=False,
-            allow_change=False,
         )
     ]
 
@@ -73,8 +71,6 @@ class CVGrayScaledImageHistogramVisualizer(MatPltVisualizer):
         ComponentIOSpec(
             name='image',
             data_container=GrayscaledImageType(),
-            allow_copy=False,
-            allow_change=False,
         )
     ]
 
@@ -111,8 +107,6 @@ class CVHSVImageHistogramVisualizer(MatPltVisualizer):
         ComponentIOSpec(
             name='image',
             data_container=ImageType(),
-            allow_copy=False,
-            allow_change=False,
         )
     ]
 

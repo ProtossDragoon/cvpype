@@ -18,16 +18,12 @@ class IntersectionFindingComponent(BaseComponent):
         ComponentIOSpec(
             name='edge_image',
             data_container=EdgeImageType(),
-            allow_copy=False,
-            allow_change=False,
         )
     ]
     outputs = [
         ComponentIOSpec(
             name='intersections',
             data_container=CoordinatesType(),
-            allow_copy=True,
-            allow_change=False,
         )
     ]
 

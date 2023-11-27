@@ -16,8 +16,6 @@ class ImageVisualizer(BaseVisualizer):
         ComponentIOSpec(
             name='image',
             data_container=ImageType(),
-            allow_copy=False,
-            allow_change=False,
         )
     ]
 
@@ -42,7 +40,7 @@ class ImageVisualizer(BaseVisualizer):
     def show(
         self,
         image
-    ):
+    ) -> None:
         cv2.imshow(self.name, image)
         if cv2.waitKey(1) == ord('q'):
             cv2.destroyWindow(self.name)

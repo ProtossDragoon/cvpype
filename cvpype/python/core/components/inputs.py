@@ -21,8 +21,6 @@ class InputsComponent():
                 iospec = ComponentIOSpec(
                     name='input',
                     data_container=InputType(),
-                    allow_copy=True,
-                    allow_change=True,
                 )
                 iospec.data_container.data = arg
                 wrapped_args.append(iospec)

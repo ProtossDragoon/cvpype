@@ -13,14 +13,10 @@ class CVLineOnCVImageVisualizer(ImageVisualizer):
         ComponentIOSpec(
             name='image',
             data_container=ImageType(),
-            allow_copy=True,
-            allow_change=False,
         ),
         ComponentIOSpec(
             name='lines',
             data_container=OpenCVLinesType(),
-            allow_copy=False,
-            allow_change=False,
         )
     ]
 
