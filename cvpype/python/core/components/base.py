@@ -76,7 +76,6 @@ class BaseComponent(ABC):
                 'by class `ComponentIOSpec`'
             )
             arg = arg.data_container
-            arg.check_type()
             input_ = input_.data_container
             if isinstance(arg, InputType):
                 input_.data = arg.data
@@ -89,6 +88,7 @@ class BaseComponent(ABC):
                     f'Input data type mismatched `{arg.__class__.__name__}`. '
                     f'(Expected `{input_.__class__.__name__}`)'
                 )
+            input_.check_type()
             unwrapped_args.append(arg)
 
         # run core method

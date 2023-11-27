@@ -14,6 +14,8 @@ class BaseType:
                 '`data_type` class variable should be a single class type '
                 'or a tuple that can pass `isinstance` function.'
             )
+        if isinstance(cls.data_type, type):
+            cls.data_type = (cls.data_type,)
         if isinstance(cls.data_type, tuple):
             for dt in cls.data_type:
                 if not isinstance(dt, type):
@@ -26,11 +28,12 @@ class BaseType:
         self
     ):
         if not isinstance(self.data, self.data_type):
-            raise TypeError(
-                f'The data `{type(self.data)}` passed through '
-                f'the class `{self.__class__.__name__}` '
-                f'is not an instance of the class `{self.data_type.__name__}`.'
-            )
+            for data_type in self.data_type:
+                raise TypeError(
+                    f'The data `{type(self.data)}` passed through '
+                    f'the class `{self.__class__.__name__}` '
+                    f'is not an instance of the class `{data_type.__name__}`.'
+                )
 
     def to_file(
         self,
