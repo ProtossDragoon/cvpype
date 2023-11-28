@@ -8,12 +8,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Project
-from cvpype.python.core.iospec import ComponentIOSpec
-from cvpype.python.core.types.image import ImageType
-from cvpype.python.core.types.coord import CoordinatesType
-from cvpype.python.applications.types.coord import OpenCVCoordinatesType
-from cvpype.python.core.visualizer.image import ImageVisualizer
-from cvpype.python.core.visualizer.matplt import MatPltVisualizer
+from cvpype.python.iospec import ComponentIOSpec
+
+# Project-Types
+from cvpype.python.basic.types.cvimage import ImageType
+from cvpype.python.basic.types.coord import CoordinatesType
+from cvpype.python.applications.types.cvcoord import OpenCVCoordinatesType
+
+# Project-Visualizers
+from cvpype.python.basic.visualizer.image import ImageVisualizer
+from cvpype.python.basic.visualizer.matplt import MatPltVisualizer
 
 
 class CVCoordsOnCVImageVisualizer(ImageVisualizer):
@@ -162,3 +166,31 @@ class CoordsHistogramVisualizer(MatPltVisualizer):
         # line
         self.line.set_ydata(self.history)
         self.ax_line.set_ylim(0, max(self.history) * 2) #FIXME: slow
+
+    # FIXME: Dirty api
+    def xbound_proper_min(
+        self,
+        li: list
+    ):
+        return min(li)
+
+    # FIXME: Dirty api
+    def ybound_proper_min(
+        self,
+        li: list
+    ):
+        return 0
+
+    # FIXME: Dirty api
+    def xbound_proper_max(
+        self,
+        li: list
+    ):
+        return max(li)
+
+    # FIXME: Dirty api
+    def ybound_proper_max(
+        self,
+        li: list
+    ):
+        return len(li)

@@ -1,19 +1,20 @@
+# Project
+from cvpype.python.iospec import ComponentIOSpec
+
 # Project-Types
-from cvpype.python.core.types.output import NoOutput
-from cvpype.python.core.types.image import RGBImageType
-from cvpype.python.applications.types.line import OpenCVLinesType as LinesType
-from cvpype.python.applications.types.coord import OpenCVCoordinatesType as CoordinatesType
+from cvpype.python.core.types.output import NoOutput # FIXME: Core layer should not be used in application layer
+from cvpype.python.basic.types.cvimage import RGBImageType
+from cvpype.python.applications.types.cvline import OpenCVLinesType
+from cvpype.python.applications.types.cvcoord import OpenCVCoordinatesType
 
 # Project-Components
-from cvpype.python.core.components.base import BaseComponent
+from cvpype.python.basic.components.custom import CustomComponent
 
 # Project-Visualizers
 from cvpype.python.applications.visualizer.sdvline import SDVLineAndEdgePairVisualizer
 
-from cvpype.python.core.iospec import ComponentIOSpec
 
-
-class SDVLineVisualizationComponent(BaseComponent):
+class SDVLineVisualizationComponent(CustomComponent):
     inputs = [
         ComponentIOSpec(
             name='image',
@@ -21,11 +22,11 @@ class SDVLineVisualizationComponent(BaseComponent):
         ),
         ComponentIOSpec(
             name='lines',
-            data_container=LinesType(),
+            data_container=OpenCVLinesType(),
         ),
         ComponentIOSpec(
             name='intersections',
-            data_container=CoordinatesType(),
+            data_container=OpenCVCoordinatesType(),
         )
     ]
     outputs = [

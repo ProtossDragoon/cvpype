@@ -4,10 +4,12 @@ import os
 # Third party
 import cv2
 
-# Project
+# Project-Types
+from cvpype.python.basic.types.cvimage import ImageType
+from cvpype.python.basic.types.cvimage import GrayscaledImageType
+
+# Project-Components
 from cvpype.python.core.components.base import BaseComponent
-from cvpype.python.core.types.image import ImageType
-from cvpype.python.core.types.image import GrayscaledImageType
 
 
 def run_component_with_singular_input_of_ImageType(

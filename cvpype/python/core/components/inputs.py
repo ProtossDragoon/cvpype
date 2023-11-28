@@ -3,11 +3,13 @@ import logging
 from typing import Any
 
 # Project
+from cvpype.python.iospec import ComponentIOSpec
+
+# Project-Types
 from cvpype.python.core.types.input import InputType
-from cvpype.python.core.iospec import ComponentIOSpec
 
 
-class InputsComponent():
+class InputsBaseComponent():
     def __call__(
         self,
         *args: Any,

@@ -4,14 +4,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Project
-from cvpype.python.core.iospec import ComponentIOSpec
-from cvpype.python.core.types.image import (
+from cvpype.python.iospec import ComponentIOSpec
+
+# Project-Types
+from cvpype.python.basic.types.cvimage import (
     ImageType,
     RGBImageType,
     HSVImageType,
     GrayscaledImageType
 )
-from cvpype.python.core.visualizer.matplt import MatPltVisualizer
+
+# Project-Visualizers
+from cvpype.python.basic.visualizer.matplt import MatPltVisualizer
 
 
 class CVRGBImageHistogramVisualizer(MatPltVisualizer):

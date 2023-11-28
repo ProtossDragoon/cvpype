@@ -1,5 +1,5 @@
 # Project-Components
-from cvpype.python.core.components.inputs import InputsComponent
+from cvpype.python.basic.components.inputs import InputsComponent
 from cvpype.python.applications.components.intersectionfinding import IntersectionFindingComponent
 from cvpype.python.applications.components.intersectionfiltering import (
     WidthBasedIntersectionFilteringComponent,
@@ -8,7 +8,7 @@ from cvpype.python.applications.components.intersectionfiltering import (
 
 
 # FIXME: Pipeline 클래스로 래핑
-def get_intersection_finding_pipeline(
+def get_intersection_pipeline(
     roi_y: int,
     width_min: int,
     width_max: int,

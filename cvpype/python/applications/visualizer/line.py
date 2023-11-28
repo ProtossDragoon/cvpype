@@ -2,10 +2,14 @@
 import cv2
 
 # Project
-from cvpype.python.core.iospec import ComponentIOSpec
-from cvpype.python.core.visualizer.image import ImageVisualizer
-from cvpype.python.core.types.image import ImageType
-from cvpype.python.applications.types.line import OpenCVLinesType
+from cvpype.python.iospec import ComponentIOSpec
+
+# Project-Types
+from cvpype.python.basic.types.cvimage import ImageType
+from cvpype.python.applications.types.cvline import OpenCVLinesType
+
+# Project-Visualizers
+from cvpype.python.basic.visualizer.image import ImageVisualizer
 
 
 class CVLineOnCVImageVisualizer(ImageVisualizer):

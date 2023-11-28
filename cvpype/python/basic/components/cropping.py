@@ -1,7 +1,16 @@
+# Project
+from cvpype.python.iospec import ComponentIOSpec
+
+# Project-Types
+from cvpype.python.basic.types.cvimage import ImageType
+
+# Project-Visualizers
+from cvpype.python.basic.visualizer.image import ImageVisualizer
+
+# Project-Components
 from cvpype.python.core.components.base import BaseComponent
-from cvpype.python.core.iospec import ComponentIOSpec
-from cvpype.python.core.visualizer.image import ImageVisualizer
-from cvpype.python.core.types.image import ImageType
+
+# Project-Utils
 from cvpype.python.utils.component import \
     run_component_with_singular_input_of_ImageType
 

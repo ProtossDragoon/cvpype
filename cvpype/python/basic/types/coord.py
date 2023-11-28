@@ -1,5 +1,6 @@
+# Project-Types
 from cvpype.python.core.types.base import BaseType
 
 
-class LinesType(BaseType):
+class CoordinatesType(BaseType):
     pass

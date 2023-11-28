@@ -4,26 +4,27 @@ from math import pi
 # Third party
 import cv2
 
+# Project
+from cvpype.python.iospec import ComponentIOSpec
+
 # Project-Types
-from cvpype.python.core.types.image import EdgeImageType
-from cvpype.python.applications.types.line import (
-    OpenCVLinesType as LinesType,
-)
+from cvpype.python.basic.types.cvimage import EdgeImageType
+from cvpype.python.applications.types.cvline import OpenCVLinesType
 
 # Project-Components
-from cvpype.python.core.components.base import BaseComponent
+from cvpype.python.basic.components.custom import CustomComponent
 
 # Project-Visualizers
 from cvpype.python.applications.visualizer.line import (
     CVLineOnCVImageVisualizer as LineOnImageVisualizer
 )
 
-from cvpype.python.core.iospec import ComponentIOSpec
+# Project-Utils
 from cvpype.python.utils.component import \
     run_component_with_singular_input_of_ImageType
 
 
-class LineFindingComponent(BaseComponent):
+class LineFindingComponent(CustomComponent):
     """Finds lines in an edge-detected image.
     """
     inputs = [
@@ -35,7 +36,7 @@ class LineFindingComponent(BaseComponent):
     outputs = [
         ComponentIOSpec(
             name='lines',
-            data_container=LinesType(),
+            data_container=OpenCVLinesType(),
         )
     ]
     visualizer = LineOnImageVisualizer(

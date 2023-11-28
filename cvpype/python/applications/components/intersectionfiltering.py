@@ -2,34 +2,31 @@
 import cv2
 import numpy as np
 
+# Project
+from cvpype.python.iospec import ComponentIOSpec
+
 # Project-Types
-from cvpype.python.core.types.image import RGBImageType
-from cvpype.python.applications.types.coord import (
-    OpenCVCoordinatesType as CoordinatesType
-)
+from cvpype.python.basic.types.cvimage import RGBImageType
+from cvpype.python.applications.types.cvcoord import OpenCVCoordinatesType
 
 # Project-Components
-from cvpype.python.core.components.base import BaseComponent
-from cvpype.python.applications.visualizer.coord import (
-    CoordsHistogramVisualizer
-)
+from cvpype.python.basic.components.custom import CustomComponent
 
-from cvpype.python.core.iospec import ComponentIOSpec
-from cvpype.python.utils.component import \
-    run_component_with_singular_input_of_ImageType
+# Project-Visualizers
+from cvpype.python.applications.visualizer.coord import CoordsHistogramVisualizer
 
 
-class WidthBasedIntersectionFilteringComponent(BaseComponent):
+class WidthBasedIntersectionFilteringComponent(CustomComponent):
     inputs = [
         ComponentIOSpec(
             name='intersections',
-            data_container=CoordinatesType(),
+            data_container=OpenCVCoordinatesType(),
         )
     ]
     outputs = [
         ComponentIOSpec(
             name='intersections',
-            data_container=CoordinatesType(),
+            data_container=OpenCVCoordinatesType(),
         )
     ]
     visualizer = CoordsHistogramVisualizer(
@@ -63,7 +60,7 @@ class WidthBasedIntersectionFilteringComponent(BaseComponent):
         return {'intersections': valid_pairs}
 
 
-class ColorBasedIntersectionFilteringComponent(BaseComponent):
+class ColorBasedIntersectionFilteringComponent(CustomComponent):
     inputs = [
         ComponentIOSpec(
             name='color_image',
@@ -71,13 +68,13 @@ class ColorBasedIntersectionFilteringComponent(BaseComponent):
         ),
         ComponentIOSpec(
             name='valid_pairs',
-            data_container=CoordinatesType(),
+            data_container=OpenCVCoordinatesType(),
         )
     ]
     outputs = [
         ComponentIOSpec(
             name='filtered_pairs',
-            data_container=CoordinatesType(),
+            data_container=OpenCVCoordinatesType(),
         )
     ]
 

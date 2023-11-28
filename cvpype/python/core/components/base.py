@@ -4,18 +4,43 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 # Project
-from cvpype.python.core.visualizer.base import BaseVisualizer
-from cvpype.python.core.iospec import ComponentIOSpec
+from cvpype.python.iospec import ComponentIOSpec
+
+# Project-Types
 from cvpype.python.core.types.base import BaseType
 from cvpype.python.core.types.input import InputType
 from cvpype.python.core.types.output import NoOutput
+
+# Project-Visualizers
+from cvpype.python.core.visualizer.base import BaseVisualizer
 
 # Configure the root logger
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-# Base Component class
+class InputsBaseComponent():
+    def __call__(
+        self,
+        *args: Any,
+        **kwargs: Any
+    ) -> Any:
+        wrapped_args = []
+        for arg in args:
+            if isinstance(arg, ComponentIOSpec):
+                wrapped_args.append(arg)
+            else:
+                iospec = ComponentIOSpec(
+                    name='input',
+                    data_container=InputType(),
+                )
+                iospec.data_container.data = arg
+                wrapped_args.append(iospec)
+        if len(wrapped_args) == 1:
+            wrapped_args = wrapped_args[0]
+        return wrapped_args
+
+
 class BaseComponent(ABC):
     name: str # FIXME: 클래스 변수로 있으면 멀티코어 처리시 복잡함
     inputs: list[ComponentIOSpec] # FIXME: 클래스 변수로 있으면 멀티코어 처리시 복잡함

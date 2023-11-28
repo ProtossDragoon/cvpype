@@ -4,10 +4,11 @@ from abc import ABC, abstractmethod
 from typing import Union
 
 # Project
-from cvpype.python.core.components.base import BaseComponent
-from cvpype.python.core.components.inputs import InputsComponent
+from cvpype.python.iospec import ComponentIOSpec
 
-from cvpype.python.core.iospec import ComponentIOSpec
+# Project-Components
+from cvpype.python.core.components.base import BaseComponent, InputsBaseComponent
+
 
 
 class BasePipeline(ABC):
@@ -23,7 +24,7 @@ class BasePipeline(ABC):
         self.components = {}
         iospec_ids = []
         for attr_name, attr_value in self.__dict__.items():
-            if isinstance(attr_value, (BaseComponent, InputsComponent)):
+            if isinstance(attr_value, (BaseComponent, InputsBaseComponent)):
                 self.logger.debug(f'Component detected (self.{attr_name})')
                 self.components[attr_name] = attr_value
             if isinstance(attr_value, BaseComponent):

@@ -2,11 +2,15 @@
 import cv2
 
 # Project
-from cvpype.python.core.iospec import ComponentIOSpec
-from cvpype.python.core.types.image import RGBImageType
-from cvpype.python.core.visualizer.image import ImageVisualizer
-from cvpype.python.applications.types.line import OpenCVLinesType
-from cvpype.python.applications.types.coord import OpenCVCoordinatesType
+from cvpype.python.iospec import ComponentIOSpec
+
+# Project-Types
+from cvpype.python.basic.types.cvimage import RGBImageType
+from cvpype.python.applications.types.cvline import OpenCVLinesType
+from cvpype.python.applications.types.cvcoord import OpenCVCoordinatesType
+
+# Project-Visualizers
+from cvpype.python.basic.visualizer.image import ImageVisualizer
 
 
 class SDVLineAndEdgePairVisualizer(ImageVisualizer):

@@ -1,19 +1,18 @@
 # Third party
 import numpy as np
 
+# Project
+from cvpype.python.iospec import ComponentIOSpec
+
 # Project-Types
-from cvpype.python.core.types.image import EdgeImageType
-from cvpype.python.applications.types.coord import (
-    OpenCVCoordinatesType as CoordinatesType
-)
+from cvpype.python.basic.types.cvimage import EdgeImageType
+from cvpype.python.applications.types.cvcoord import OpenCVCoordinatesType
 
 # Project-Components
-from cvpype.python.core.components.base import BaseComponent
-
-from cvpype.python.core.iospec import ComponentIOSpec
+from cvpype.python.basic.components.custom import CustomComponent
 
 
-class IntersectionFindingComponent(BaseComponent):
+class IntersectionFindingComponent(CustomComponent):
     inputs = [
         ComponentIOSpec(
             name='edge_image',
@@ -23,7 +22,7 @@ class IntersectionFindingComponent(BaseComponent):
     outputs = [
         ComponentIOSpec(
             name='intersections',
-            data_container=CoordinatesType(),
+            data_container=OpenCVCoordinatesType(),
         )
     ]
 

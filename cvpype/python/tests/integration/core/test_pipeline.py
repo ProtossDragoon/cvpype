@@ -6,16 +6,15 @@ import numpy as np
 
 # Project-Types
 from cvpype.python.core.types.base import BaseType
-from cvpype.python.core.types.image import ImageType
+from cvpype.python.basic.types.cvimage import ImageType
 
 # Project-Components
-from cvpype.python.core.components.base import BaseComponent
-from cvpype.python.core.components.inputs import InputsComponent
+from cvpype.python.core.components.base import BaseComponent, InputsBaseComponent
 
 # Project-Pipelines
 from cvpype.python.core.pipelines.base import BasePipeline
 
-from cvpype.python.core.iospec import ComponentIOSpec
+from cvpype.python.iospec import ComponentIOSpec
 
 
 class ExampleAddComponent(BaseComponent):
@@ -65,7 +64,7 @@ class ExamplePipeline(BasePipeline):
         self
     ) -> None:
         super().__init__()
-        self.input = InputsComponent()
+        self.input = InputsBaseComponent()
         self.output = ExampleAddComponent()
 
     def run(
@@ -82,7 +81,7 @@ class ExampleBrokenPipeline(BasePipeline):
         self
     ) -> None:
         super().__init__()
-        self.input = InputsComponent()
+        self.input = InputsBaseComponent()
         self.calc = ExampleAddComponent()
         self.output = ExampleAddComponent()
 
@@ -101,7 +100,7 @@ class ExampleImagePipeline(BasePipeline):
         self
     ) -> None:
         super().__init__()
-        self.input = InputsComponent()
+        self.input = InputsBaseComponent()
         self.output = ExampleImageIOComponent()
 
     def run(

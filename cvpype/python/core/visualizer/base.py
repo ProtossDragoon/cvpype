@@ -3,7 +3,7 @@ import logging
 from abc import ABC, abstractmethod
 
 # Project
-from cvpype.python.core.iospec import ComponentIOSpec
+from cvpype.python.iospec import ComponentIOSpec
 
 # Configure the root logger
 logging.basicConfig(level=logging.INFO)
