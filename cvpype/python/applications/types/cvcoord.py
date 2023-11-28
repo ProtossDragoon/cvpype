@@ -2,5 +2,5 @@
 from cvpype.python.basic.types.coord import CoordinatesType
 
 
-class OpenCVCoordinatesType(CoordinatesType):
+class CVCoordinatesType(CoordinatesType):
     pass

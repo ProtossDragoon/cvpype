@@ -4,8 +4,8 @@ from cvpype.python.iospec import ComponentIOSpec
 # Project-Types
 from cvpype.python.core.types.output import NoOutput # FIXME: Core layer should not be used in application layer
 from cvpype.python.basic.types.cvimage import RGBImageType
-from cvpype.python.applications.types.cvline import OpenCVLinesType
-from cvpype.python.applications.types.cvcoord import OpenCVCoordinatesType
+from cvpype.python.applications.types.cvline import CVLinesType
+from cvpype.python.applications.types.cvcoord import CVCoordinatesType
 
 # Project-Components
 from cvpype.python.basic.components.custom import CustomComponent
@@ -22,11 +22,11 @@ class SDVLineVisualizationComponent(CustomComponent):
         ),
         ComponentIOSpec(
             name='lines',
-            data_container=OpenCVLinesType(),
+            data_container=CVLinesType(),
         ),
         ComponentIOSpec(
             name='intersections',
-            data_container=OpenCVCoordinatesType(),
+            data_container=CVCoordinatesType(),
         )
     ]
     outputs = [

@@ -6,8 +6,8 @@ from cvpype.python.iospec import ComponentIOSpec
 
 # Project-Types
 from cvpype.python.basic.types.cvimage import RGBImageType
-from cvpype.python.applications.types.cvline import OpenCVLinesType
-from cvpype.python.applications.types.cvcoord import OpenCVCoordinatesType
+from cvpype.python.applications.types.cvline import CVLinesType
+from cvpype.python.applications.types.cvcoord import CVCoordinatesType
 
 # Project-Visualizers
 from cvpype.python.basic.visualizer.image import ImageVisualizer
@@ -21,11 +21,11 @@ class SDVLineAndEdgePairVisualizer(ImageVisualizer):
         ),
         ComponentIOSpec(
             name='lines',
-            data_container=OpenCVLinesType(),
+            data_container=CVLinesType(),
         ),
         ComponentIOSpec(
             name='intersections',
-            data_container=OpenCVCoordinatesType(),
+            data_container=CVCoordinatesType(),
         )
     ]
 
@@ -41,8 +41,8 @@ class SDVLineAndEdgePairVisualizer(ImageVisualizer):
     def paint(
         self,
         image: RGBImageType,
-        lines: OpenCVLinesType,
-        intersections: OpenCVCoordinatesType
+        lines: CVLinesType,
+        intersections: CVCoordinatesType
     ):
         v_image = image.data
         for line in lines.data:

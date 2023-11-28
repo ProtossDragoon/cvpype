@@ -19,7 +19,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class InputsBaseComponent():
+class InputsBaseComponent(ABC):
     def __call__(
         self,
         *args: Any,

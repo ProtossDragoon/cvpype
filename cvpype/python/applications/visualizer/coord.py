@@ -13,14 +13,14 @@ from cvpype.python.iospec import ComponentIOSpec
 # Project-Types
 from cvpype.python.basic.types.cvimage import ImageType
 from cvpype.python.basic.types.coord import CoordinatesType
-from cvpype.python.applications.types.cvcoord import OpenCVCoordinatesType
+from cvpype.python.applications.types.cvcoord import CVCoordinatesType
 
 # Project-Visualizers
 from cvpype.python.basic.visualizer.image import ImageVisualizer
 from cvpype.python.basic.visualizer.matplt import MatPltVisualizer
 
 
-class CVCoordsOnCVImageVisualizer(ImageVisualizer):
+class CVCoordsOnImageVisualizer(ImageVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
@@ -28,7 +28,7 @@ class CVCoordsOnCVImageVisualizer(ImageVisualizer):
         ),
         ComponentIOSpec(
             name='coordinates',
-            data_container=OpenCVCoordinatesType(),
+            data_container=CVCoordinatesType(),
         )
     ]
 
@@ -42,7 +42,7 @@ class CVCoordsOnCVImageVisualizer(ImageVisualizer):
     def paint(
         self,
         image: ImageType,
-        coords: OpenCVCoordinatesType
+        coords: CVCoordinatesType
     ):
         v_image = cv2.cvtColor(image.data, cv2.COLOR_GRAY2BGR)
         for coord in coords.data:

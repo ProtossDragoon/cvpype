@@ -18,7 +18,7 @@ from cvpype.python.basic.types.cvimage import (
 from cvpype.python.basic.visualizer.matplt import MatPltVisualizer
 
 
-class CVRGBImageHistogramVisualizer(MatPltVisualizer):
+class RGBImageHistogramVisualizer(MatPltVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
@@ -70,7 +70,7 @@ class CVRGBImageHistogramVisualizer(MatPltVisualizer):
         self.line_b.set_ydata(histogram_b)
 
 
-class CVGrayScaledImageHistogramVisualizer(MatPltVisualizer):
+class GrayScaledImageHistogramVisualizer(MatPltVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
@@ -106,7 +106,7 @@ class CVGrayScaledImageHistogramVisualizer(MatPltVisualizer):
         self.line_gray.set_ydata(histogram)
 
 
-class CVHSVImageHistogramVisualizer(MatPltVisualizer):
+class HSVImageHistogramVisualizer(MatPltVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',

@@ -1,5 +1,5 @@
 # Project-Components
-from cvpype.python.core.components.inputs import InputsBaseComponent
+from cvpype.python.core.components.base import InputsBaseComponent
 
 
 class InputsComponent(InputsBaseComponent):

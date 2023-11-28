@@ -2,5 +2,5 @@
 from cvpype.python.basic.types.line import LinesType
 
 
-class OpenCVLinesType(LinesType):
+class CVLinesType(LinesType):
     pass

@@ -6,7 +6,7 @@ from cvpype.python.iospec import ComponentIOSpec
 
 # Project-Types
 from cvpype.python.basic.types.cvimage import EdgeImageType
-from cvpype.python.applications.types.cvcoord import OpenCVCoordinatesType
+from cvpype.python.applications.types.cvcoord import CVCoordinatesType
 
 # Project-Components
 from cvpype.python.basic.components.custom import CustomComponent
@@ -22,7 +22,7 @@ class IntersectionFindingComponent(CustomComponent):
     outputs = [
         ComponentIOSpec(
             name='intersections',
-            data_container=OpenCVCoordinatesType(),
+            data_container=CVCoordinatesType(),
         )
     ]
 

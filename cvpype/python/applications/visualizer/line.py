@@ -6,13 +6,13 @@ from cvpype.python.iospec import ComponentIOSpec
 
 # Project-Types
 from cvpype.python.basic.types.cvimage import ImageType
-from cvpype.python.applications.types.cvline import OpenCVLinesType
+from cvpype.python.applications.types.cvline import CVLinesType
 
 # Project-Visualizers
 from cvpype.python.basic.visualizer.image import ImageVisualizer
 
 
-class CVLineOnCVImageVisualizer(ImageVisualizer):
+class CVLineOnImageVisualizer(ImageVisualizer):
     inputs = [
         ComponentIOSpec(
             name='image',
@@ -20,14 +20,14 @@ class CVLineOnCVImageVisualizer(ImageVisualizer):
         ),
         ComponentIOSpec(
             name='lines',
-            data_container=OpenCVLinesType(),
+            data_container=CVLinesType(),
         )
     ]
 
     def paint(
         self,
         image: ImageType,
-        lines: OpenCVLinesType
+        lines: CVLinesType
     ):
         v_image = cv2.cvtColor(image.data, cv2.COLOR_GRAY2BGR)
         for line in lines.data:

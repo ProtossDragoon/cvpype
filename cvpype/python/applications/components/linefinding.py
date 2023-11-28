@@ -9,14 +9,14 @@ from cvpype.python.iospec import ComponentIOSpec
 
 # Project-Types
 from cvpype.python.basic.types.cvimage import EdgeImageType
-from cvpype.python.applications.types.cvline import OpenCVLinesType
+from cvpype.python.applications.types.cvline import CVLinesType
 
 # Project-Components
 from cvpype.python.basic.components.custom import CustomComponent
 
 # Project-Visualizers
 from cvpype.python.applications.visualizer.line import (
-    CVLineOnCVImageVisualizer as LineOnImageVisualizer
+    CVLineOnImageVisualizer as LineOnImageVisualizer
 )
 
 # Project-Utils
@@ -36,7 +36,7 @@ class LineFindingComponent(CustomComponent):
     outputs = [
         ComponentIOSpec(
             name='lines',
-            data_container=OpenCVLinesType(),
+            data_container=CVLinesType(),
         )
     ]
     visualizer = LineOnImageVisualizer(
