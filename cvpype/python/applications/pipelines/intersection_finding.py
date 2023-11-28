@@ -7,6 +7,7 @@ from cvpype.python.applications.components.intersectionfiltering import (
 )
 
 
+# FIXME: Pipeline 클래스로 래핑
 def get_intersection_finding_pipeline(
     roi_y: int,
     width_min: int,

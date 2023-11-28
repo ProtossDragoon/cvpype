@@ -14,6 +14,7 @@ from cvpype.python.applications.components.sdvlinevisualization import SDVLineVi
 from cvpype.python.applications.pipelines.intersection_finding import get_intersection_finding_pipeline
 
 
+# FIXME: Pipeline 클래스로 래핑
 def get_line_tracking_pipeline(
    crop_y: int,
    crop_y_end: int,
