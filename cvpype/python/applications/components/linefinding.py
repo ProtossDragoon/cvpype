@@ -63,12 +63,3 @@ class LineFindingComponent(CustomComponent):
         self.log(f'found {len(lines)} lines', level='debug')
         self.visualize(image, lines)
         return {'lines': lines}
-
-
-if __name__ == '__main__':
-    component = LineFindingComponent()
-    import os
-    video_path = os.path.join('data', 'project_edge.avi')
-    run_component_with_singular_input_of_ImageType(
-        component, video_path
-    )

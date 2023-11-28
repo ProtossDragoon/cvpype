@@ -49,8 +49,8 @@ class GrayscailingComponent(BaseComponent):
 if __name__ == '__main__':
     component = GrayscailingComponent()
     import os
-    video_path = os.path.join('data', 'project.avi')
-    output_path = os.path.join('data', 'project_grayscale.avi')
+    video_path = os.path.join('data', 'sample.avi')
+    output_path = os.path.join('data', 'sample_grayscale.avi')
     run_component_with_singular_input_of_ImageType(
         component, video_path, output_path=output_path
     )

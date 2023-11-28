@@ -69,7 +69,7 @@ class CroppingComponent(BaseComponent):
 if __name__ == '__main__':
     component = CroppingComponent()
     import os
-    video_path = os.path.join('data', 'project.avi')
+    video_path = os.path.join('data', 'sample.avi')
     run_component_with_singular_input_of_ImageType(
         component, video_path
     )

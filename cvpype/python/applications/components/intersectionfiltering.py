@@ -114,7 +114,3 @@ class ColorBasedIntersectionFilteringComponent(CustomComponent):
                  f'(#filtered/#input)')
 
         return {'filtered_pairs': valid_black_pairs}
-
-
-if __name__ == '__main__':
-    pass

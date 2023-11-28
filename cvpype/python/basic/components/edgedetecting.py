@@ -56,8 +56,8 @@ class EdgeDetectingComponent(BaseComponent):
 if __name__ == '__main__':
     component = EdgeDetectingComponent()
     import os
-    video_path = os.path.join('data', 'project_grayscale.avi')
+    video_path = os.path.join('data', 'sample_grayscale.avi')
     run_component_with_singular_input_of_ImageType(
         component, video_path,
-        output_path=os.path.join('data', 'project_edge.avi')
+        output_path=os.path.join('data', 'sample_edge.avi')
     )
