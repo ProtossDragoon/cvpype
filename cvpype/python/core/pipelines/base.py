@@ -10,7 +10,6 @@ from cvpype.python.iospec import ComponentIOSpec
 from cvpype.python.core.components.base import BaseComponent, InputsBaseComponent
 
 
-
 class BasePipeline(ABC):
     def __init__(
         self,
