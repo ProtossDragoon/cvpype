@@ -243,6 +243,6 @@ cython_debug/
 #.idea/
 
 # Project
-data
 .vscode
+data
 docs/doxypage
