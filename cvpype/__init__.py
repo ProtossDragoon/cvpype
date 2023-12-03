@@ -1,7 +1,7 @@
 """! @brief 파이썬 프론트엔드 컴퓨터비전 파이프라인
 """
 ##
-# @mainpage Computer visioin Pipeline with Python Frontend
+# @mainpage cvpype
 #
 # @section 들어가며
 # - 영상처리를 할 때에는 보통 여러 알고리즘들 사이의 복잡한 의존관계가 만들어짐.
