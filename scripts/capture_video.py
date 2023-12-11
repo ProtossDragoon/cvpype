@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__file__)
 
 
-def sample_video(
+def capture_video(
     n: int,
     video_path: os.PathLike,
     save_dir: os.PathLike,
@@ -84,4 +84,4 @@ if __name__ == '__main__':
     parser.add_argument("--save_dir", type=str, help="Directory to save sampled images")
 
     args = parser.parse_args()
-    sample_video(args.n, args.video_path, args.save_dir)
+    capture_video(args.n, args.video_path, args.save_dir)
