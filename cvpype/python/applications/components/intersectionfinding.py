@@ -13,24 +13,25 @@ from cvpype.python.basic.components.custom import CustomComponent
 
 
 class IntersectionFindingComponent(CustomComponent):
-    inputs = [
-        ComponentIOSpec(
-            name='edge_image',
-            data_container=EdgeImageType(),
-        )
-    ]
-    outputs = [
-        ComponentIOSpec(
-            name='intersections',
-            data_container=CVCoordinatesType(),
-        )
-    ]
 
     def __init__(
         self,
         y: int,
     ):
-        super().__init__()
+        super().__init__(
+            inputs = [
+                ComponentIOSpec(
+                    name='edge_image',
+                    data_container=EdgeImageType(),
+                )
+            ],
+            outputs = [
+                ComponentIOSpec(
+                    name='intersections',
+                    data_container=CVCoordinatesType(),
+                )
+            ]
+        )
         self.y = y
 
     def run(

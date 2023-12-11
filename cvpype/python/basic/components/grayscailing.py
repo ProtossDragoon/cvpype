@@ -10,31 +10,37 @@ from cvpype.python.basic.types.cvimage import RGBImageType, GrayscaledImageType
 from cvpype.python.basic.visualizer.image import ImageVisualizer
 
 # Project-Components
-from cvpype.python.core.components.base import BaseComponent
+from cvpype.python.core.components.base import IOBaseComponent
 
 # Project-Utils
 from cvpype.python.utils.component import \
     run_component_with_singular_input_of_ImageType
 
 
-class GrayscailingComponent(BaseComponent):
+class GrayscailingComponent(IOBaseComponent):
     """Converts an RGB image to a grayscaled image.
     """
-    inputs = [
-        ComponentIOSpec(
-            name='image',
-            data_container=RGBImageType(),
+
+    def __init__(
+        self
+    ):
+        super().__init__(
+            inputs = [
+                ComponentIOSpec(
+                    name='image',
+                    data_container=RGBImageType(),
+                )
+            ],
+            outputs = [
+                ComponentIOSpec(
+                    name='image',
+                    data_container=GrayscaledImageType(),
+                )
+            ],
+            visualizer = ImageVisualizer(
+                name='GrayscailingComponent'
+            )
         )
-    ]
-    outputs = [
-        ComponentIOSpec(
-            name='image',
-            data_container=GrayscaledImageType(),
-        )
-    ]
-    visualizer = ImageVisualizer(
-        name='GrayscailingComponent'
-    )
 
     def run(
         self,

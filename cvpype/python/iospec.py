@@ -5,7 +5,7 @@ class ComponentIOSpec:
     def __init__(
         self,
         name: str,
-        data_container,
+        data_container: BaseType,
         allow_copy: bool = True,
         allow_change: bool = True,
     ) -> None:

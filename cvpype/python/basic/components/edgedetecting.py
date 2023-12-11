@@ -11,31 +11,37 @@ from cvpype.python.basic.types.cvimage import GrayscaledImageType, EdgeImageType
 from cvpype.python.basic.visualizer.image import ImageVisualizer
 
 # Project-Components
-from cvpype.python.core.components.base import BaseComponent
+from cvpype.python.core.components.base import IOBaseComponent
 
 # Project-Utils
 from cvpype.python.utils.component import \
     run_component_with_singular_input_of_ImageType
 
 
-class EdgeDetectingComponent(BaseComponent):
+class EdgeDetectingComponent(IOBaseComponent):
     """Applies edge detection to a grayscaled image.
     """
-    inputs = [
-        ComponentIOSpec(
-            name='image',
-            data_container=GrayscaledImageType(),
+
+    def __init__(
+        self
+    ):
+        super().__init__(
+            inputs = [
+                ComponentIOSpec(
+                    name='image',
+                    data_container=GrayscaledImageType(),
+                )
+            ],
+            outputs = [
+                ComponentIOSpec(
+                    name='image',
+                    data_container=EdgeImageType(),
+                )
+            ],
+            visualizer = ImageVisualizer(
+                name='EdgeDetectingComponent'
+            )
         )
-    ]
-    outputs = [
-        ComponentIOSpec(
-            name='image',
-            data_container=EdgeImageType(),
-        )
-    ]
-    visualizer = ImageVisualizer(
-        name='EdgeDetectingComponent'
-    )
 
     def run(
         self,

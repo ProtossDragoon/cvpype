@@ -27,21 +27,27 @@ from cvpype.python.utils.component import \
 class LineFindingComponent(CustomComponent):
     """Finds lines in an edge-detected image.
     """
-    inputs = [
-        ComponentIOSpec(
-            name='image',
-            data_container=EdgeImageType(),
+
+    def __init__(
+        self
+    ):
+        super().__init__(
+            inputs = [
+                ComponentIOSpec(
+                    name='image',
+                    data_container=EdgeImageType(),
+                )
+            ],
+            outputs = [
+                ComponentIOSpec(
+                    name='lines',
+                    data_container=CVLinesType(),
+                )
+            ],
+            visualizer = LineOnImageVisualizer(
+                name='LineFindingComponent'
+            )
         )
-    ]
-    outputs = [
-        ComponentIOSpec(
-            name='lines',
-            data_container=CVLinesType(),
-        )
-    ]
-    visualizer = LineOnImageVisualizer(
-        name='LineFindingComponent'
-    )
 
     def run(
         self,

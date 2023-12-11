@@ -17,28 +17,29 @@ from cvpype.python.applications.visualizer.coord import CoordsHistogramVisualize
 
 
 class WidthBasedIntersectionFilteringComponent(CustomComponent):
-    inputs = [
-        ComponentIOSpec(
-            name='intersections',
-            data_container=CVCoordinatesType(),
-        )
-    ]
-    outputs = [
-        ComponentIOSpec(
-            name='intersections',
-            data_container=CVCoordinatesType(),
-        )
-    ]
-    visualizer = CoordsHistogramVisualizer(
-        name='WidthBasedIntersectionFiltering'
-    )
 
     def __init__(
         self,
         width_min: int = 3,
         width_max: int = 30,
     ):
-        super().__init__()
+        super().__init__(
+            inputs = [
+                ComponentIOSpec(
+                    name='intersections',
+                    data_container=CVCoordinatesType(),
+                )
+            ],
+            outputs = [
+                ComponentIOSpec(
+                    name='intersections',
+                    data_container=CVCoordinatesType(),
+                )
+            ],
+            visualizer = CoordsHistogramVisualizer(
+                name='WidthBasedIntersectionFiltering'
+            )
+        )
         self.width_min = width_min
         self.width_max = width_max
 
@@ -61,29 +62,30 @@ class WidthBasedIntersectionFilteringComponent(CustomComponent):
 
 
 class ColorBasedIntersectionFilteringComponent(CustomComponent):
-    inputs = [
-        ComponentIOSpec(
-            name='color_image',
-            data_container=RGBImageType(),
-        ),
-        ComponentIOSpec(
-            name='valid_pairs',
-            data_container=CVCoordinatesType(),
-        )
-    ]
-    outputs = [
-        ComponentIOSpec(
-            name='filtered_pairs',
-            data_container=CVCoordinatesType(),
-        )
-    ]
 
     def __init__(
         self,
         y: int,
         black_threshold: int = 230,  # FIXME: manual
     ):
-        super().__init__()
+        super().__init__(
+            inputs=[
+                ComponentIOSpec(
+                    name='color_image',
+                    data_container=RGBImageType(),
+                ),
+                ComponentIOSpec(
+                    name='valid_pairs',
+                    data_container=CVCoordinatesType(),
+                )
+            ],
+            outputs=[
+                ComponentIOSpec(
+                    name='filtered_pairs',
+                    data_container=CVCoordinatesType(),
+                )
+            ]
+        )
         self.y = y
         self.black_threshold = black_threshold
 

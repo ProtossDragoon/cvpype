@@ -4,32 +4,39 @@ import unittest
 # Third party
 import numpy as np
 
+# Project
+from cvpype.python.iospec import ComponentIOSpec
+
 # Project-Types
 from cvpype.python.core.types.base import BaseType
 from cvpype.python.basic.types.cvimage import ImageType
 
 # Project-Components
-from cvpype.python.core.components.base import BaseComponent, InputsBaseComponent
+from cvpype.python.core.components.base import IOBaseComponent
+from cvpype.python.basic.components.inputs import InputsComponent
 
 # Project-Pipelines
 from cvpype.python.core.pipelines.base import BasePipeline
 
-from cvpype.python.iospec import ComponentIOSpec
 
-
-class ExampleAddComponent(BaseComponent):
-    inputs = [
-        ComponentIOSpec(
-            name='example_input',
-            data_container=BaseType()
+class ExampleAddComponent(IOBaseComponent):
+    def __init__(
+        self
+    ):
+        super().__init__(
+            inputs = [
+                ComponentIOSpec(
+                    name='example_input',
+                    data_container=BaseType()
+                )
+            ],
+            outputs = [
+                ComponentIOSpec(
+                    name='example_output',
+                    data_container=BaseType()
+                )
+            ]
         )
-    ]
-    outputs = [
-        ComponentIOSpec(
-            name='example_output',
-            data_container=BaseType()
-        )
-    ]
 
     def run(
         self,
@@ -38,19 +45,24 @@ class ExampleAddComponent(BaseComponent):
         return {'example_output': x + 1}
 
 
-class ExampleImageIOComponent(BaseComponent):
-    inputs = [
-        ComponentIOSpec(
-            name='example_input',
-            data_container=ImageType()
+class ExampleImageIOComponent(IOBaseComponent):
+    def __init__(
+        self
+    ):
+        super().__init__(
+            inputs = [
+                ComponentIOSpec(
+                    name='example_input',
+                    data_container=ImageType()
+                )
+            ],
+            outputs = [
+                ComponentIOSpec(
+                    name='example_output',
+                    data_container=ImageType()
+                )
+            ]
         )
-    ]
-    outputs = [
-        ComponentIOSpec(
-            name='example_output',
-            data_container=ImageType()
-        )
-    ]
 
     def run(
         self,
@@ -64,34 +76,34 @@ class ExamplePipeline(BasePipeline):
         self
     ) -> None:
         super().__init__()
-        self.input = InputsBaseComponent()
-        self.output = ExampleAddComponent()
+        self.input = InputsComponent()
+        self.add_one = ExampleAddComponent()
 
     def run(
         self,
         x
     ):
         x1 = self.input(x)
-        x2 = self.output(x1)
+        x2 = self.add_one(x1)
         return x2
 
 
-class ExampleBrokenPipeline(BasePipeline):
+class ExampleIdenticalComponentExistentPipeline(BasePipeline):
     def __init__(
         self
     ) -> None:
         super().__init__()
-        self.input = InputsBaseComponent()
-        self.calc = ExampleAddComponent()
-        self.output = ExampleAddComponent()
+        self.input = InputsComponent()
+        self.add_one_1 = ExampleAddComponent()
+        self.add_one_2 = ExampleAddComponent()
 
     def run(
         self,
         x
     ):
         x1 = self.input(x)
-        x2 = self.calc(x1)
-        x3 = self.output(x2)
+        x2 = self.add_one_1(x1)
+        x3 = self.add_one_2(x2)
         return x3
 
 
@@ -100,7 +112,7 @@ class ExampleImagePipeline(BasePipeline):
         self
     ) -> None:
         super().__init__()
-        self.input = InputsBaseComponent()
+        self.input = InputsComponent()
         self.output = ExampleImageIOComponent()
 
     def run(
@@ -120,27 +132,30 @@ class TestPipeline(unittest.TestCase):
         self.assertIsInstance(self.pipeline, BasePipeline)
 
     def test_init_graph(self):
-        self.pipeline.create_graph()
+        self.pipeline.autocreate_graph()
         self.assertIn(self.pipeline.input,
                       self.pipeline.components.values())
-        self.assertIn(self.pipeline.output,
+        self.assertIn(self.pipeline.add_one,
                       self.pipeline.components.values())
 
     def test_run(self):
-        for i in range(100):
+        for i in range(-100, 100):
             self.assertEqual(i+1, self.pipeline.run(i).data_container.data)
 
 
-class TestBrokenPipeline(unittest.TestCase):
+class TestIdenticalComponentExistentPipeline(unittest.TestCase):
     def setUp(self):
-        self.pipeline = ExampleBrokenPipeline()
+        self.pipeline = ExampleIdenticalComponentExistentPipeline()
 
     def test_init(self):
         self.assertIsInstance(self.pipeline, BasePipeline)
 
     def test_init_graph(self):
-        with self.assertRaises(AssertionError):
-            self.pipeline.create_graph()
+        self.pipeline.autocreate_graph()
+
+    def test_run(self):
+        for i in range(-100, 100):
+            self.assertEqual(i+2, self.pipeline.run(i).data_container.data)
 
 
 class TestImagePipeline(unittest.TestCase):
@@ -151,7 +166,7 @@ class TestImagePipeline(unittest.TestCase):
         self.assertIsInstance(self.pipeline, BasePipeline)
 
     def test_init_graph(self):
-        self.pipeline.create_graph()
+        self.pipeline.autocreate_graph()
         self.assertIn(self.pipeline.input,
                       self.pipeline.components.values())
         self.assertIn(self.pipeline.output,

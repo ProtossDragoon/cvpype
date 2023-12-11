@@ -24,7 +24,7 @@ class BaseType:
                         'class variable should be class types.'
                     )
 
-    def check_type(
+    def _check_inner_data_type(
         self
     ):
         if not isinstance(self.data, self.data_type):
@@ -34,6 +34,24 @@ class BaseType:
                     f'the class `{self.__class__.__name__}` '
                     f'is not an instance of the class `{data_type.__name__}`.'
                 )
+
+    def is_proper_for(
+        self,
+        type_: object,
+    ):
+        """
+        The function `is_proper_for` checks if the data type of an object
+        is a subtype of a specified type and raises an error if it is not.
+
+        @param type_ The `type_` parameter is an object that represents the expected data type. It is used
+        to check if the current object is a subtype of the expected data type.
+        """
+        if not issubclass(self.__class__, type_.__class__):
+            raise TypeError(
+                f'Data type mismatched `{self.__class__.__name__}`. '
+                f'(Expected a subtype of `{type_.__class__.__name__}`)'
+            )
+        self._check_inner_data_type()
 
     def to_file(
         self,

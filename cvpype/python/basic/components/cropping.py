@@ -8,31 +8,16 @@ from cvpype.python.basic.types.cvimage import ImageType
 from cvpype.python.basic.visualizer.image import ImageVisualizer
 
 # Project-Components
-from cvpype.python.core.components.base import BaseComponent
+from cvpype.python.core.components.base import IOBaseComponent
 
 # Project-Utils
 from cvpype.python.utils.component import \
     run_component_with_singular_input_of_ImageType
 
 
-class CroppingComponent(BaseComponent):
+class CroppingComponent(IOBaseComponent):
     """Crops the upper side (from 0 to y) of an image.
     """
-    inputs = [
-        ComponentIOSpec(
-            name='image',
-            data_container=ImageType(),
-        )
-    ]
-    outputs = [
-        ComponentIOSpec(
-            name='image',
-            data_container=ImageType(),
-        )
-    ]
-    visualizer = ImageVisualizer(
-        name='CroppingComponent'
-    )
 
     def __init__(
         self,
@@ -41,7 +26,23 @@ class CroppingComponent(BaseComponent):
         x: int = None,
         x_end: int = None,
     ):
-        super().__init__()
+        super().__init__(
+            inputs = [
+                ComponentIOSpec(
+                    name='image',
+                    data_container=ImageType(),
+                )
+            ],
+            outputs = [
+                ComponentIOSpec(
+                    name='image',
+                    data_container=ImageType(),
+                )
+            ],
+            visualizer = ImageVisualizer(
+                name='CroppingComponent'
+            )
+        )
         self.y = y
         self.y_end = y_end
         self.x = x
