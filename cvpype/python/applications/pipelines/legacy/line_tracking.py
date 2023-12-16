@@ -11,7 +11,7 @@ from cvpype.python.applications.components.linefinding import LineFindingCompone
 from cvpype.python.applications.components.sdvlinevisualization import SDVLineVisualizationComponent
 
 # Project-Pipelines
-from cvpype.python.applications.pipelines.intersection import get_intersection_pipeline
+from cvpype.python.applications.pipelines.legacy.intersection import get_intersection_pipeline
 
 
 # FIXME: Pipeline 클래스로 래핑
