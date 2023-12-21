@@ -60,8 +60,8 @@ class RGBImageHistogramVisualizer(MatPltVisualizer):
         self,
         image: ImageType
     ):
-        (b, g, r) = cv2.split(image)
-        n_pixels = np.prod(image.shape[:2])
+        (b, g, r) = cv2.split(image.data)
+        n_pixels = np.prod(image.data.shape[:2])
         histogram_r = cv2.calcHist([r], [0], None, [self.bins], [0, 255]) / n_pixels
         histogram_g = cv2.calcHist([g], [0], None, [self.bins], [0, 255]) / n_pixels
         histogram_b = cv2.calcHist([b], [0], None, [self.bins], [0, 255]) / n_pixels
@@ -101,8 +101,8 @@ class GrayScaledImageHistogramVisualizer(MatPltVisualizer):
         self,
         image: ImageType
     ):
-        n_pixels = np.prod(image.shape[:2])
-        histogram = cv2.calcHist([image], [0], None, [self.bins], [0, 255]) / n_pixels
+        n_pixels = np.prod(image.data.shape[:2])
+        histogram = cv2.calcHist([image.data], [0], None, [self.bins], [0, 255]) / n_pixels
         self.line_gray.set_ydata(histogram)
 
 
@@ -153,6 +153,6 @@ class HSVImageHistogramVisualizer(MatPltVisualizer):
         histogram_h = cv2.calcHist([h], [0], None, [self.bins], [0, 255]) / n_pixels
         histogram_s = cv2.calcHist([s], [0], None, [self.bins], [0, 255]) / n_pixels
         histogram_v = cv2.calcHist([v], [0], None, [self.bins], [0, 255]) / n_pixels
-        self.lineH.set_ydata(histogram_h)
-        self.lineS.set_ydata(histogram_s)
-        self.lineV.set_ydata(histogram_v)
+        self.line_h.set_ydata(histogram_h)
+        self.line_s.set_ydata(histogram_s)
+        self.line_v.set_ydata(histogram_v)
