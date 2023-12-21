@@ -8,6 +8,8 @@ from threading import Lock, Thread
 import imutils
 
 
+# TODO: divide into input stream abstract class and output stream abstract class.
+# TODO: refactor with producer-consumer structured threading.
 class BaseStreamer(ABC):
     def __set_logger(
         self,
@@ -38,9 +40,10 @@ class BaseStreamer(ABC):
         the video stream. If no value is provided, it defaults to `None`. If you set `height` to None,
         height value will be set by the original width of the stream on run-time.
         """
+        self.SIGNAL_NOTREADY = 'NOTREADY'
         self.__set_logger()
         self._output_frame_locker = Lock()
-        self._output_frame = None
+        self._output_frame = self.SIGNAL_NOTREADY
         self.width = width
         self.height = height
 
@@ -48,7 +51,7 @@ class BaseStreamer(ABC):
     def read_from_stream(
         self
     ) -> None:
-        """ This function write value on `self.output_frame`.
+        """ This function writes value on `self.output_frame`.
         """
         raise NotImplementedError
 
@@ -71,11 +74,25 @@ class BaseStreamer(ABC):
         with self._output_frame_locker:
             return self._output_frame
 
+    @property
+    def is_ready(
+        self
+    ):
+        with self._output_frame_locker:
+            return self._output_frame is not self.SIGNAL_NOTREADY
+
     @output_frame.setter
     def output_frame(
         self,
         img
     ):
+        if img is None:
+            self.logger.warning(
+                'Trying to set `output_frame` to None. Ignore this frame. '
+                'Check something is trying to set `output_frame` before '
+                'running `read_from_stream`, or implementation of `read_from_stream`. '
+            )
+            return
         img = imutils.resize(img, width=self.width, height=self.height)
         with self._output_frame_locker:
             if (not self.height) or (not self.width):

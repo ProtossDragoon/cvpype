@@ -19,6 +19,7 @@ class BaseVisualizer(ABC):
     ) -> None:
         super().__init__()
         self.name = name
+        self.is_threading = False # FIXME: Not pretty API
         self.is_operating = is_operating
         self.logger = logging.getLogger(self.__class__.__name__)
         self.__did_runtime_init = False
@@ -54,3 +55,13 @@ class BaseVisualizer(ABC):
         **kwargs
     ):
         raise NotImplementedError
+
+    def on(
+        self
+    ):
+        self.is_operating = True
+
+    def off(
+        self
+    ):
+        self.is_operating = False

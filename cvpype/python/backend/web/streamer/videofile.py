@@ -44,7 +44,12 @@ class VideofileWebStreamer(BaseWebStreamer):
                 break
             frame = imutils.resize(frame, width=self.width, height=self.height)
             self.output_frame = frame
-            cv2.waitKey(self.delay)
+            try:
+                cv2.waitKey(self.delay)
+            except:
+                # FIXME: dirty
+                # NOTE: https://github.com/opencv/opencv/issues/22602
+                time.sleep(self.delay)
         self.logger.warning('Broken pipe')
 
     def push_to_browser(self):
