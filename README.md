@@ -148,12 +148,13 @@ Use the Pipeline class to automatically and effortlessly convert your visualizer
 
 # Roadmap
 
-- See `Motivation` section of this documentation.
 - Implement a producer-consumer architecture utilizing a queue to manage threading in the web visualizer.
-- Employ multi-processing to efficiently operate the image processing pipeline.
-- Add benchmarking decorators for core methods in components and pipelines.
+- Use multi-processing for efficient operation of the image processing pipeline. (Considering the use of Ray for shared memory mechanisms)
+- Introduce benchmarking decorators for core methods in components and pipelines.
+- Provide an example Pybind11 codebase for language-level optimization.
 - Develop a user-friendly and easily editable web visualizer.
 - Conceal IOSpec within the run method of the visualizer.
+- To see more: go to the `Motivation` section of this documentation.
 
 ## 🔥
 
