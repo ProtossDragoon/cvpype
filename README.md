@@ -22,9 +22,9 @@ python3 -m scripts.pipeline_from_video data/sample_bumpy.avi
   - ✅ Supports real-time components and file visualization
 - **Does the algorithm effectively integrate with other algorithms?**
   - ✅ Rapid pipeline connectivity support
-  - ✅ Extensive support for pipeline visualization
+  - ✅ Extensive support for componentwise/combined visualization in the pipeline
 - **Is there considerable potential for optimization in the algorithm?**
-  - ✅ Easy toggle between debugging and optimization modes
+  - TODO: Easy toggle between debugging and optimization modes
   - TODO: Develop code templates for seamless numba integration
   - TODO: In-depth benchmarking of the algorithm's computation time, including Python overhead analysis
   - TODO: Implement automated parallel processing in the pipeline
@@ -148,8 +148,10 @@ Use the Pipeline class to automatically and effortlessly convert your visualizer
 
 # Roadmap
 
+- See `Motivation` section of this documentation.
 - Implement a producer-consumer architecture utilizing a queue to manage threading in the web visualizer.
 - Employ multi-processing to efficiently operate the image processing pipeline.
+- Add benchmarking decorators for core methods in components and pipelines.
 - Develop a user-friendly and easily editable web visualizer.
 - Conceal IOSpec within the run method of the visualizer.
 
