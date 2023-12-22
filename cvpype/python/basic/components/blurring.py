@@ -19,7 +19,7 @@ from cvpype.python.utils.component import \
 
 
 class BilateralBlurringComponent(IOBaseComponent):
-    """Applies bilateral Gaussian blurring to a grayscaled image.
+    """! Applies bilateral Gaussian blurring to a grayscaled image.
     """
 
     def __init__(

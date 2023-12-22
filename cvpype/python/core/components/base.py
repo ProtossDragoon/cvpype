@@ -117,7 +117,7 @@ class _InputsComponentTool():
         self,
         srcs: list[ComponentIOSpec]
     ):
-        """The function `move_to_input` copies the data from the `data_container`
+        """! The function `move_to_input` copies the data from the `data_container`
         of each argument to the corresponding `data_container` of the `inputs` list.
 
         @param srcs A list of `ComponentIOSpec` objects.

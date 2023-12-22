@@ -25,7 +25,7 @@ from cvpype.python.utils.component import \
 
 
 class LineFindingComponent(CustomComponent):
-    """Finds lines in an edge-detected image.
+    """! Finds lines in an edge-detected image.
     """
 
     def __init__(
